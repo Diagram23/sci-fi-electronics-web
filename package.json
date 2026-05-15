@@ -1,0 +1,32 @@
+{
+    "name":  "sci-fi-electronics-web",
+    "private":  true,
+    "version":  "1.0.0",
+    "type":  "module",
+    "scripts":  {
+                    "dev":  "vite",
+                    "build":  "vite build",
+                    "preview":  "vite preview",
+                    "sanity":  "sanity dev",
+                    "sanity:deploy":  "sanity deploy"
+                },
+    "dependencies":  {
+                         "@sanity/client":  "^7.20.0",
+                         "@sanity/image-url":  "^2.0.3",
+                         "@studio-freight/lenis":  "^1.0.42",
+                         "framer-motion":  "^11.18.2",
+                         "lucide-react":  "0.487.0",
+                         "react":  "18.3.1",
+                         "react-dom":  "18.3.1",
+                         "react-router-dom":  "^7.13.0",
+                         "sanity":  "^3.99.0",
+                         "styled-components":  "^6.4.1"
+                     },
+    "devDependencies":  {
+                            "@tailwindcss/vite":  "4.1.12",
+                            "@vitejs/plugin-react":  "4.7.0",
+                            "lightningcss":  "^1.32.0",
+                            "tailwindcss":  "4.1.12",
+                            "vite":  "6.3.5"
+                        }
+}

@@ -1,0 +1,44 @@
+[data-buildout-section] {
+  position: relative;
+  isolation: isolate;
+}
+
+[data-buildout-section] > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-buildout-section] h2,
+[data-buildout-section] h3 {
+  text-wrap: balance;
+}
+
+[data-buildout-section="audio-demo"] canvas {
+  width: 100%;
+  height: 100%;
+}
+
+[data-buildout-section="plugin-comparison"] [style*="overflow-x: auto"] {
+  scrollbar-color: rgba(184, 147, 109, 0.5) rgba(255, 255, 255, 0.04);
+}
+
+[data-buildout-section="plugin-comparison"] [style*="overflow-x: auto"]::-webkit-scrollbar {
+  height: 6px;
+}
+
+[data-buildout-section="plugin-comparison"] [style*="overflow-x: auto"]::-webkit-scrollbar-thumb {
+  background: rgba(184, 147, 109, 0.45);
+  border-radius: 999px;
+}
+
+.buildout-final-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  [data-buildout-section] button,
+  [data-buildout-section] a {
+    min-height: 40px;
+  }
+}

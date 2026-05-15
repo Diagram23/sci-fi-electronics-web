@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+.env
+.env.local
+*.log
+dev-error.log
+.DS_Store
+qa-screenshots/*.png
+qa-screenshots/chrome-profile*/
+qa-screenshots/tmp*/
+qa-screenshots/current-*/
+playwright-report/
+test-results/
