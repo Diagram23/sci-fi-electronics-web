@@ -112,6 +112,22 @@ try {
       const sectionNodes = [...document.querySelectorAll('[data-home-section]')];
       const homeSections = sectionNodes.map((node) => node.getAttribute('data-home-section'));
       const componentNames = sectionNodes.map((node) => node.getAttribute('data-component') || 'missing-component');
+      const firstHomeSection = sectionNodes[0] || null;
+      const firstHeroText = (firstHomeSection?.innerText || '').replace(/\\s+/g, ' ').trim();
+      const firstHeroComponent = firstHomeSection?.getAttribute('data-component') || '';
+      const approvedHeroTextFound =
+        /fractal/i.test(firstHeroText) &&
+        /delay/i.test(firstHeroText) &&
+        /time manipulation engine/i.test(firstHeroText) &&
+        /(request|acquire) fractal delay/i.test(firstHeroText) &&
+        /complete collection/i.test(firstHeroText);
+      const genericHeroBlocked =
+        firstHeroComponent !== 'HeroSectionAdvanced' &&
+        !(/future sound tools/i.test(firstHeroText) && /explore sound packs/i.test(firstHeroText));
+      const promoBarFound = /intro pricing active/i.test(text);
+      const pluginVisualFound = !!document.querySelector('[data-component="ProductHeroFigmaHybrid"]') &&
+        /192khz/i.test(firstHeroText) &&
+        /vst3/i.test(firstHeroText);
       const missingHomeSection = sectionNodes.filter((node) => !node.getAttribute('data-home-section')).length;
       const missingOrigin = sectionNodes
         .filter((node) => !node.getAttribute('data-origin'))
@@ -195,6 +211,12 @@ try {
         homeSectionCount: homeSections.length,
         homeSections,
         componentNames,
+        approvedHomeEntry: approvedHeroTextFound && genericHeroBlocked && promoBarFound && pluginVisualFound,
+        heroText: approvedHeroTextFound ? 'FRACTAL DELAY found' : 'FRACTAL DELAY entry missing',
+        genericHeroBlocked,
+        promoBarFound,
+        pluginVisualFound,
+        firstHeroComponent,
         heroCount,
         horizontalOverflow,
         missingTerms,
@@ -238,6 +260,8 @@ try {
   ];
 
   assertPass(metrics.homeSectionCount >= 10, 'Home renders fewer than 10 data-home-section blocks.', metrics);
+  assertPass(metrics.approvedHomeEntry, 'Home does not render the user-approved FRACTAL DELAY entry.', metrics);
+  assertPass(metrics.genericHeroBlocked, 'Home is using the generic SCI-FI ELECTRONICS / FUTURE SOUND TOOLS entry.', metrics);
   assertPass(metrics.scrollHeight > metrics.innerHeight * 3, 'Home scrollHeight is not at least 3x innerHeight.', metrics);
   assertPass(metrics.horizontalOverflow === 0, 'Home has visible horizontal overflow.', metrics);
   assertPass(metrics.heroCount === 1, 'Home must contain exactly one public hero.', metrics);

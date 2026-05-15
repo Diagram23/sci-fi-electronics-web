@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react';
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavbarAdvanced from '@/app/components/NavbarAdvanced';
 import PromoBar from '@/app/components/PromoBar';
 import ScrollProgress from '@/app/components/ScrollProgress';
@@ -60,12 +60,10 @@ function RouteFallback() {
 }
 
 function AppShell() {
-  const location = useLocation();
   const [cursorEnabled, setCursorEnabled] = useState(true);
   const [isDesktopPointer, setIsDesktopPointer] = useState(false);
   const [showParticles, setShowParticles] = useState(true);
   const [effectsEnabled, setEffectsEnabled] = useState(true);
-  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const evaluate = () => {
@@ -102,9 +100,9 @@ function AppShell() {
         <ParticlesBackground enabled={effectsEnabled && showParticles} />
         <MouseSpotlight enabled={effectsEnabled && isDesktopPointer} />
 
-        {!isHome && <PromoBar />}
+        <PromoBar />
         <ScrollProgress />
-        <NavbarAdvanced minimal={isHome} />
+        <NavbarAdvanced />
 
         <main className="relative z-10">
           <Suspense fallback={<RouteFallback />}>

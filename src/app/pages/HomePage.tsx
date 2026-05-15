@@ -1,5 +1,5 @@
 import Footer from '@/app/components/Footer';
-import HeroSectionAdvanced from '@/app/components/HeroSectionAdvanced';
+import ProductHeroFigmaHybrid from '@/app/components/ProductHeroFigmaHybrid';
 import TrustMarquee from '@/app/components/TrustMarquee';
 import FeaturesSection from '@/app/components/FeaturesSection';
 import ProductsShowcase from '@/app/components/ProductsShowcase';
@@ -25,10 +25,10 @@ export default function HomePage() {
         data-home-section="hero"
         data-component={HOME_HERO_COMPONENT}
         data-entry-source={HOME_ENTRY_SOURCE}
-        data-origin="figma-local"
+        data-origin="codex-enhancement"
         data-public-decision="keep"
       >
-        <HeroSectionAdvanced />
+        <ProductHeroFigmaHybrid />
       </div>
       <div data-home-section="figma-features" data-component="FeaturesSection" data-origin="figma-local" data-public-decision="keep">
         <FeaturesSection />

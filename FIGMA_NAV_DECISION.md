@@ -1,5 +1,11 @@
 # Figma Navigation Decision
 
+## PUBLIC HOME ENTRY LOCK / BLOQUEO DE ENTRADA PUBLICA
+
+The approved public `/` entry includes the full commercial shell from the user-approved FRACTAL DELAY screenshot: PromoBar plus full `NavbarAdvanced`. Do not switch Home back to minimal navbar or hide PromoBar unless the user explicitly requests a new first-screen direction.
+
+La entrada aprobada de `/` incluye PromoBar y `NavbarAdvanced` completo. No volver al navbar minimal ni ocultar PromoBar en Home sin autorizacion explicita.
+
 Scope: local repo/export only. The current online Figma navigation cannot be verified without a new export or file access.
 
 ## Components Compared
@@ -7,44 +13,42 @@ Scope: local repo/export only. The current online Figma navigation cannot be ver
 | Component | Path | Origin | Current Mount | Labels / Structure | Decision |
 |---|---|---|---|---|---|
 | `Navbar` | `src/app/components/Navbar.tsx` | unknown / legacy local | dev/reference only | `Home`, `Plugins`, `Features`, `Membrana`, `Buy Now` | Do not use publicly. It includes cyan/blue/purple CTA styling and a `Buy Now` affordance that implies commerce. |
-| `NavbarAdvanced` | `src/app/components/NavbarAdvanced.tsx` | codex-enhancement / shell | global public shell in `src/app/App.tsx` | `Inicio`, `Plugins`, `Archivo`, disabled account, disabled cart | Keep as codex-required shell until a newer Figma export provides a complete nav. It uses functional public routes and disables fake auth/cart. |
-| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | public shell on non-Home routes only in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle · $349 · Save $107`, `Request Access` | Disabled on `/` so the Figma-local Home entry stays clean. Kept temporarily on secondary routes; it points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
+| `NavbarAdvanced` | `src/app/components/NavbarAdvanced.tsx` | codex-enhancement / shell | global public shell in `src/app/App.tsx` | `Inicio`, `Plugins`, `Archivo`, ES/EN, disabled account, disabled cart | Keep as codex-required shell until a newer Figma export provides a complete nav. It matches the approved screenshot more closely than minimal mode and keeps fake auth/cart disabled. |
+| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | global public shell in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle - $349 - Save $107`, `Request Access` | Visible on `/` because the approved screenshot includes it. It points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
 
 ## Labels Current vs Local Candidates
 
 | Area | Current public labels | Local candidate labels | Difference |
 |---|---|---|---|
-| Primary nav | `Inicio`, `Plugins`, `Archivo` | `Home`, `Plugins`, `Features`, `Membrana` in `Navbar.tsx` | Current nav is shorter and route-safe; local candidate includes unsupported/legacy anchors and unclear `Membrana`. |
-| Logo | `SFE` / `SCI-FI ELECTRONICS` | `SCI-FI` text logo | Current shell is closer to brand emblem/footer system and avoids cyan gradient text. |
+| Primary nav | `Inicio`, `Plugins`, `Archivo` | `Home`, `Plugins`, `Features`, `Membrana` in `Navbar.tsx` | Current nav is shorter, route-safe, and matches the approved screenshot language. |
+| Logo | `SFE` / `SCI-FI ELECTRONICS` | `SCI-FI` text logo | Current shell is closer to the approved screenshot and brand emblem/footer system. |
 | Commerce CTA | disabled cart/account + promo `Request Access` | `Buy Now` | Current shell is more honest because checkout/auth are not connected. |
 
 ## Why `NavbarAdvanced` Remains Public
 
-- `Navbar` is not reliable source-of-truth for current production because it contains a live-looking `Buy Now` CTA and older cyber/cyan styling.
+- `Navbar` is not reliable source-of-truth for current production because it contains a live-looking `Buy Now` CTA and older cyan styling.
 - `NavbarAdvanced` is treated as `codex-enhancement`, not Figma original.
-- It is kept because the shell must provide functional route navigation and must not fake auth/cart/checkout.
-- If a new Figma export includes a full navbar, it should replace `NavbarAdvanced` or be merged into it.
+- It is kept because the shell must provide functional route navigation, must not fake auth/cart/checkout, and matches the approved FRACTAL DELAY screenshot.
+- If a new Figma export includes a full navbar, it should replace `NavbarAdvanced` or be merged into it only after explicit approval.
 
-## Home-Specific Minimal Mode
+## Home Shell Mode
 
-`src/app/App.tsx` now passes `minimal={true}` to `NavbarAdvanced` only on `/`.
+`src/app/App.tsx` renders `PromoBar` and full `NavbarAdvanced` on `/`.
 
-Home minimal mode:
+Home full mode:
 
 - keeps `Inicio`, `Plugins`, `Archivo`
 - keeps centered `SFE` / `SCI-FI ELECTRONICS`
-- hides ES/EN selector
-- hides login
-- hides cart
-- hides mobile `Contact Sales`
-- disables `PromoBar` entirely on `/`
+- shows ES/EN selector
+- shows disabled login
+- shows disabled cart
+- keeps PromoBar visible
 
-Reason: the local Figma first screen must open as a clean brand entry, not as a pricing/auth/cart campaign header.
+Reason: the approved first screenshot is the FRACTAL DELAY commercial hero with full header chrome, not the generic brand-entry shell.
 
 ## Captures
 
 Final nav captures generated by the QA pass:
 
-- `qa-screenshots/final-nav-1440.png`
-- `qa-screenshots/final-home-390.png`
-- `qa-screenshots/final-home-768.png`
+- `qa-screenshots/approved-entry-home-1440.png`
+- `qa-screenshots/approved-entry-home-390.png`

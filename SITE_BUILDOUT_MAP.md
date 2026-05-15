@@ -1,10 +1,16 @@
 # SCI-FI ELECTRONICS Site Buildout Map
 
+## PUBLIC HOME ENTRY LOCK / BLOQUEO DE ENTRADA PUBLICA
+
+The approved public `/` entry is the FRACTAL DELAY hero shown in the user-approved screenshot. It must keep `PromoBar`, full `NavbarAdvanced`, the plugin mockup, FRACTAL DELAY copy, and Fractal Delay / Complete Collection CTAs. Do not replace it with `HeroSectionAdvanced` / SCI-FI ELECTRONICS generic entry without explicit approval.
+
+La entrada aprobada de `/` es el hero de FRACTAL DELAY de la captura del usuario. No cambiar por `HeroSectionAdvanced` ni por la entrada generica SCI-FI ELECTRONICS sin autorizacion explicita.
+
 This file tracks the local Figma/Figma Make buildout state so future passes do not drift into unrelated redesign.
 
 ## Home Current Architecture
 - PromoBar / NavbarAdvanced: mounted globally in `App.tsx`; keep.
-- HeroSectionAdvanced: mounted publicly after Figma purge; local Figma hero candidate.
+- ProductHeroFigmaHybrid: mounted publicly as the approved FRACTAL DELAY first viewport.
 - FeaturesSection: mounted publicly; local Figma brand/tool statement.
 - ProductsShowcase: mounted publicly; local Figma CHROMA/sound-pack showcase.
 - PluginShowcase: mounted publicly; local Figma ctrl4filter/plugin showcase.
@@ -21,7 +27,7 @@ This file tracks the local Figma/Figma Make buildout state so future passes do n
 
 ## Available But Not Primary Home Sections
 - HeroSection: local/Figma candidate; available in `/dev/figma-reference`; not public home.
-- ProductHeroFigmaHybrid: Codex hybrid; moved out of public Home and retained as dev/commercial reference.
+- HeroSectionAdvanced: generic local/Figma brand entry; available in dev/reference; not public home after approved FRACTAL DELAY restore.
 - ProductHeroPremium: Codex-created previous hero; not active.
 - PremiumLandingSections: Codex-created simplification; not active.
 - ProductGrid / AudioDemoSection / HowItWorksSection / PluginComparisonTable: not mounted on Home after purge; catalogue/product-system sections remain available through `/plugins` or dev reference.

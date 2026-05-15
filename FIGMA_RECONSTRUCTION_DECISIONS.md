@@ -1,17 +1,23 @@
 # Figma Reconstruction Decisions
 
+## PUBLIC HOME ENTRY LOCK / BLOQUEO DE ENTRADA PUBLICA
+
+The approved public `/` entry is the FRACTAL DELAY hero shown in the user-approved screenshot: PromoBar, full Navbar, FRACTAL DELAY editorial hero, plugin mockup, and Fractal Delay / Complete Collection CTAs.
+
+La entrada aprobada de `/` es el hero de FRACTAL DELAY de la captura del usuario. No cambiar por `HeroSectionAdvanced` ni por la entrada generica SCI-FI ELECTRONICS / FUTURE SOUND TOOLS sin autorizacion explicita.
+
 ## Verification Scope
 - Verified against the local project/export present in this repo.
 - Not verified against the current online Figma file. A newer Figma export or file access is required for 100% source-of-truth parity.
 
 ## Public Home
-- Active public hero after purge: `HeroSectionAdvanced`.
-- Active public section sequence after purge: `HeroSectionAdvanced`, `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, `ComingSoon`, `TrustMarquee`, `DawCompatibilityStrip`, `ArchiveTeaser`, `BrandStatement`, `BundleManifesto`, `TestimonialsSection`, `Footer`.
-- Public Home now prioritizes the most probable local Figma sequence instead of the previous inflated Fractal Delay/Codex commercial buildout.
+- Active public hero after correction: `ProductHeroFigmaHybrid`.
+- Active public section sequence: `ProductHeroFigmaHybrid`, `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, `ComingSoon`, `TrustMarquee`, `DawCompatibilityStrip`, `ArchiveTeaser`, `BrandStatement`, `BundleManifesto`, `TestimonialsSection`, `Footer`.
+- Public Home now prioritizes the user-approved FRACTAL DELAY entry screenshot as visual source-of-truth for the first viewport.
 - Every public Home section now exposes `data-home-section`, `data-component`, `data-origin`, and `data-public-decision`.
-- The Home entry contract is locked in `src/app/config/siteConfig.ts` with `HOME_ENTRY_SOURCE = "figma-local"` and `HOME_HERO_COMPONENT = "HeroSectionAdvanced"`.
-- Current public Home origin count from `scripts/verify-public-home.mjs`: `figma-local: 11`, `codex-required: 1`.
-- `/` disables `PromoBar` and uses `NavbarAdvanced` minimal mode so the first viewport matches the local Figma brand entry instead of pricing/auth/cart campaign chrome.
+- The Home entry contract is locked in `src/app/config/siteConfig.ts` with `HOME_ENTRY_SOURCE = "user-approved-fractal-delay-entry"` and `HOME_HERO_COMPONENT = "ProductHeroFigmaHybrid"`.
+- Current expected public Home origin count from `scripts/verify-public-home.mjs`: `figma-local: 10`, `codex-enhancement: 1`, `codex-required: 1`.
+- `/` shows `PromoBar` and uses the full `NavbarAdvanced` shell so the first viewport matches the approved FRACTAL DELAY screenshot.
 
 ## Local Figma Reconstruction
 - Dev route: `/dev/figma-original-reconstruction`.
@@ -33,10 +39,10 @@
 - Fixed shell components (`Navbar`, `NavbarAdvanced`, `PromoBar`, `StickyBundleCTA`, `CookieConsent`) are documented rather than duplicated inline when rendering them would obscure the gallery.
 
 ## Substitutions
-- `ProductHeroFigmaHybrid` no longer replaces the original hero publicly.
-  - Decision: move out of public Home; keep as dev/reference/commercial candidate.
-- `HeroSectionAdvanced` is restored publicly.
-  - Decision: source-of-truth priority because it is the cleaner local Figma hero candidate.
+- `ProductHeroFigmaHybrid` is restored publicly as the approved `/` entry.
+  - Decision: source-of-truth priority because the user-approved screenshot shows the FRACTAL DELAY commercial hero, not the generic brand hero.
+- `HeroSectionAdvanced` is not the public `/` entry.
+  - Decision: keep in dev/reference routes only unless the user explicitly requests returning to the generic SCI-FI ELECTRONICS entry.
 - `FinalSignalCTA` is Codex-created.
   - Decision: removed from public Home because `BundleManifesto` covers the commercial close with a Figma-local component.
 - `Footer` is active and uses the local Figma brand emblem.
@@ -53,7 +59,7 @@
 
 ## Components Kept Dev Only
 - `HeroSection`: older full-screen brand/plugin hero, dev only.
-- `HeroSectionAdvanced`: public Home entry and also visible in dev comparison routes.
+- `HeroSectionAdvanced`: generic local-Figma brand entry, dev/reference only after approved FRACTAL DELAY restore.
 - `ProductHeroPremium`: Codex replacement reference, dev only.
 - `PremiumLandingSections`: Codex/product-page fallback, dev only.
 - `BrandIntro`: local Figma asset splash, dev only/disabled.

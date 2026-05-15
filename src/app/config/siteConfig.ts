@@ -1,5 +1,5 @@
-export const HOME_ENTRY_SOURCE = 'figma-local' as const;
-export const HOME_HERO_COMPONENT = 'HeroSectionAdvanced' as const;
+export const HOME_ENTRY_SOURCE = 'user-approved-fractal-delay-entry' as const;
+export const HOME_HERO_COMPONENT = 'ProductHeroFigmaHybrid' as const;
 
 export const siteConfig = {
   siteName: 'SCI-FI ELECTRONICS',

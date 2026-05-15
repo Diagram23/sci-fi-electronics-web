@@ -103,9 +103,8 @@ async function openRoute(route, index) {
 
     await send('Runtime.enable');
     await send('Page.enable');
-    await sleep(8000);
 
-    const evaluation = await send('Runtime.evaluate', {
+    const evaluateRoute = () => send('Runtime.evaluate', {
       returnByValue: true,
       expression: `(() => {
         const mainText = document.querySelector('main')?.innerText || document.body.innerText || '';
@@ -135,6 +134,16 @@ async function openRoute(route, index) {
         };
       })()`,
     });
+
+    let evaluation;
+    for (let attempt = 0; attempt < 18; attempt += 1) {
+      await sleep(attempt === 0 ? 2500 : 1000);
+      evaluation = await evaluateRoute();
+      const value = evaluation.result.result.value;
+      if (value.mainContentFound || value.h1 || value.scrollHeight > value.innerHeight * 1.4) {
+        break;
+      }
+    }
 
     const metrics = evaluation.result.result.value;
     const statusResponse = await fetch(target);
