@@ -6,6 +6,8 @@ Scope: public route `/` after the Figma purge pass. This audit is based on the l
 
 The previous entry state was campaign-inflated by global Codex chrome: `PromoBar` added intro pricing, `NavbarAdvanced` exposed login/cart controls, and earlier passes used `ProductHeroFigmaHybrid` / Fractal Delay campaign composition. The current `/` entry restores the local Figma first screen: `HeroSectionAdvanced` with SCI-FI ELECTRONICS, Future Sound Tools, brand copy, Explore Sound Packs / View Upcoming Plugins, and the lower brand cards.
 
+The entry source is now protected in `src/app/config/siteConfig.ts` with `HOME_ENTRY_SOURCE = "figma-local"` and `HOME_HERO_COMPONENT = "HeroSectionAdvanced"`. `HomePage.tsx` uses those constants on the public hero wrapper.
+
 | Order | data-home-section | Component | Path | Origin | Origin Evidence | Public Decision | Reason | Duplicates With | Should Stay / Move / Remove / Dev-only | Responsive Notes | CTA/Link Status |
 |---:|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | `hero` | `HeroSectionAdvanced` | `src/app/components/HeroSectionAdvanced.tsx` | figma-local | Listed in local component set; mounted by `src/app/pages/FigmaOriginalReconstructionPage.tsx` as source reconstruction hero; no Codex replacement marker. | keep | Most faithful local hero candidate; replaces `ProductHeroFigmaHybrid` on `/`. | `ProductHeroPremium`, `ProductHeroFigmaHybrid`, `HeroSection` | stay | Uses normal document flow; no fixed/inset hero wrapper. | Links to `/#sound-packs` and `/plugins`; both route/check correctly. |

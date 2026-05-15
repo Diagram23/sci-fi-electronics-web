@@ -1,3 +1,6 @@
+export const HOME_ENTRY_SOURCE = 'figma-local' as const;
+export const HOME_HERO_COMPONENT = 'HeroSectionAdvanced' as const;
+
 export const siteConfig = {
   siteName: 'SCI-FI ELECTRONICS',
   brandShortName: 'SFE',
@@ -25,6 +28,8 @@ export const siteConfig = {
   buyMode: 'contact-fallback',
   checkoutEnabled: false,
   audioDemosEnabled: false,
+  homeEntrySource: HOME_ENTRY_SOURCE,
+  homeHeroComponent: HOME_HERO_COMPONENT,
   enableBrandIntro: false,
   enableDevFigmaReference: true,
   enableDevComponentGallery: true,

@@ -10,6 +10,7 @@ import ArchiveTeaser from '@/app/components/ArchiveTeaser';
 import BrandStatement from '@/app/components/BrandStatement';
 import BundleManifesto from '@/app/components/BundleManifesto';
 import TestimonialsSection from '@/app/components/TestimonialsSection';
+import { HOME_ENTRY_SOURCE, HOME_HERO_COMPONENT } from '@/app/config/siteConfig';
 import { useSEO } from '@/app/hooks/useSEO';
 
 export default function HomePage() {
@@ -20,7 +21,13 @@ export default function HomePage() {
 
   return (
     <>
-      <div data-home-section="hero" data-component="HeroSectionAdvanced" data-origin="figma-local" data-public-decision="keep">
+      <div
+        data-home-section="hero"
+        data-component={HOME_HERO_COMPONENT}
+        data-entry-source={HOME_ENTRY_SOURCE}
+        data-origin="figma-local"
+        data-public-decision="keep"
+      >
         <HeroSectionAdvanced />
       </div>
       <div data-home-section="figma-features" data-component="FeaturesSection" data-origin="figma-local" data-public-decision="keep">

@@ -1,6 +1,6 @@
 # Figma Export Coverage Audit
 
-Generated: 2026-05-14T19:31:08.067Z
+Generated: 2026-05-15T11:57:33.398Z
 
 ## Metrics
 

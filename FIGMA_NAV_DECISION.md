@@ -8,7 +8,7 @@ Scope: local repo/export only. The current online Figma navigation cannot be ver
 |---|---|---|---|---|---|
 | `Navbar` | `src/app/components/Navbar.tsx` | unknown / legacy local | dev/reference only | `Home`, `Plugins`, `Features`, `Membrana`, `Buy Now` | Do not use publicly. It includes cyan/blue/purple CTA styling and a `Buy Now` affordance that implies commerce. |
 | `NavbarAdvanced` | `src/app/components/NavbarAdvanced.tsx` | codex-enhancement / shell | global public shell in `src/app/App.tsx` | `Inicio`, `Plugins`, `Archivo`, disabled account, disabled cart | Keep as codex-required shell until a newer Figma export provides a complete nav. It uses functional public routes and disables fake auth/cart. |
-| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | global public shell in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle · $349 · Save $107`, `Request Access` | Keep temporarily. It points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
+| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | public shell on non-Home routes only in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle · $349 · Save $107`, `Request Access` | Disabled on `/` so the Figma-local Home entry stays clean. Kept temporarily on secondary routes; it points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
 
 ## Labels Current vs Local Candidates
 

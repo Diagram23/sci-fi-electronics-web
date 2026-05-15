@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 const baseUrl = process.env.SFE_BASE_URL || 'http://127.0.0.1:5173';
+const cdpBasePort = Number(process.env.CDP_BASE_PORT || 9550);
 const routes = [
   '/',
   '/plugins',
@@ -43,7 +44,7 @@ async function getJson(url) {
 }
 
 async function openRoute(route, index) {
-  const port = 9450 + index;
+  const port = cdpBasePort + index;
   const profile = mkdtempSync(join(tmpdir(), 'sfe-smoke-'));
   const target = `${baseUrl}${route}`;
   const browser = spawn(chrome, [

@@ -9,6 +9,7 @@
 - Active public section sequence after purge: `HeroSectionAdvanced`, `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, `ComingSoon`, `TrustMarquee`, `DawCompatibilityStrip`, `ArchiveTeaser`, `BrandStatement`, `BundleManifesto`, `TestimonialsSection`, `Footer`.
 - Public Home now prioritizes the most probable local Figma sequence instead of the previous inflated Fractal Delay/Codex commercial buildout.
 - Every public Home section now exposes `data-home-section`, `data-component`, `data-origin`, and `data-public-decision`.
+- The Home entry contract is locked in `src/app/config/siteConfig.ts` with `HOME_ENTRY_SOURCE = "figma-local"` and `HOME_HERO_COMPONENT = "HeroSectionAdvanced"`.
 - Current public Home origin count from `scripts/verify-public-home.mjs`: `figma-local: 11`, `codex-required: 1`.
 - `/` disables `PromoBar` and uses `NavbarAdvanced` minimal mode so the first viewport matches the local Figma brand entry instead of pricing/auth/cart campaign chrome.
 
@@ -52,7 +53,7 @@
 
 ## Components Kept Dev Only
 - `HeroSection`: older full-screen brand/plugin hero, dev only.
-- `HeroSectionAdvanced`: stronger local Figma reconstruction candidate, dev only.
+- `HeroSectionAdvanced`: public Home entry and also visible in dev comparison routes.
 - `ProductHeroPremium`: Codex replacement reference, dev only.
 - `PremiumLandingSections`: Codex/product-page fallback, dev only.
 - `BrandIntro`: local Figma asset splash, dev only/disabled.
