@@ -12,11 +12,11 @@ La entrada aprobada de `/` es el hero de FRACTAL DELAY de la captura del usuario
 
 ## Public Home
 - Active public hero after correction: `ProductHeroFigmaHybrid`.
-- Active public section sequence: `ProductHeroFigmaHybrid`, `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, `ComingSoon`, `TrustMarquee`, `DawCompatibilityStrip`, `ArchiveTeaser`, `BrandStatement`, `BundleManifesto`, `TestimonialsSection`, `Footer`.
+- Active public section sequence: `ProductHeroFigmaHybrid`, `PremiumLandingSections`, `TrustMarquee`, `DawCompatibilityStrip`, `ArchiveTeaser`, `BrandStatement`, `Footer`.
 - Public Home now prioritizes the user-approved FRACTAL DELAY entry screenshot as visual source-of-truth for the first viewport.
 - Every public Home section now exposes `data-home-section`, `data-component`, `data-origin`, and `data-public-decision`.
 - The Home entry contract is locked in `src/app/config/siteConfig.ts` with `HOME_ENTRY_SOURCE = "user-approved-fractal-delay-entry"` and `HOME_HERO_COMPONENT = "ProductHeroFigmaHybrid"`.
-- Current expected public Home origin count from `scripts/verify-public-home.mjs`: `figma-local: 10`, `codex-enhancement: 1`, `codex-required: 1`.
+- Current expected public Home origin count from `scripts/verify-public-home.mjs`: `figma-local: 4`, `codex-enhancement: 2`, `codex-required: 1`.
 - `/` shows `PromoBar` and uses the full `NavbarAdvanced` shell so the first viewport matches the approved FRACTAL DELAY screenshot.
 
 ## Local Figma Reconstruction
@@ -53,9 +53,9 @@ La entrada aprobada de `/` es el hero de FRACTAL DELAY de la captura del usuario
   - Decision: keep in gallery; it duplicates already-mounted philosophy/features/bundle blocks.
 
 ## Components Integrated Publicly In This Pass
-- `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, and `ComingSoon` are mounted directly on `/`.
-- Reason: they represent the older local Figma/product-direction material and should be part of the public Home source-of-truth pass, not only `/about` or dev.
-- `ProductGrid`, `AudioDemoSection`, `HowItWorksSection`, and `PluginComparisonTable` are no longer mounted on `/`; they remain better suited for `/plugins` or product-specific routes.
+- `PremiumLandingSections` is mounted directly on `/` because it is the Fractal Delay-specific philosophy/features/bundle continuation.
+- `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, `ComingSoon`, and `TestimonialsSection` are removed from `/` because the user screenshots show they introduce unrelated generic/CHROMA/ctrl4filter material.
+- `ProductGrid`, `AudioDemoSection`, `HowItWorksSection`, and `PluginComparisonTable` are not mounted on `/`; they remain better suited for `/plugins` or product-specific routes.
 
 ## Components Kept Dev Only
 - `HeroSection`: older full-screen brand/plugin hero, dev only.

@@ -167,7 +167,12 @@ try {
         ['hero', 'hero-legacy'],
         ['product-grid', 'figma-plugin-showcase'],
         ['how-it-works', 'figma-features'],
+        ['fractal-signal-system', 'figma-features'],
+        ['fractal-signal-system', 'figma-products-showcase'],
+        ['fractal-signal-system', 'figma-plugin-showcase'],
       ];
+      const forbiddenHomeText = ['chroma', 'ctrl4filter'];
+      const forbiddenContent = forbiddenHomeText.filter((term) => text.includes(term));
       const duplicateViolations = duplicatePairs
         .filter(([a, b]) => homeSections.includes(a) && homeSections.includes(b))
         .map(([a, b]) => a + ' + ' + b);
@@ -196,7 +201,6 @@ try {
         { label: 'Archive', ok: text.includes('archive') || homeSections.includes('archive-teaser') },
         { label: 'Brand', ok: text.includes('sci-fi electronics') || homeSections.includes('brand-statement') },
         { label: 'Bundle', ok: text.includes('bundle') || homeSections.includes('bundle') },
-        { label: 'Testimonials', ok: text.includes('testimonial') || text.includes('producer') || homeSections.includes('testimonials') },
         { label: 'Footer', ok: text.includes('legal') || text.includes('support') || homeSections.includes('footer') },
       ];
       const missingTerms = requiredTerms.filter((item) => !item.ok).map((item) => item.label);
@@ -230,6 +234,7 @@ try {
         disallowedCodex,
         disallowedRequired,
         duplicateViolations,
+        forbiddenContent,
         ctaWarnings,
         internalLinks: [...new Set(internalLinks)],
         htmlOverflowY: getComputedStyle(document.documentElement).overflowY,
@@ -259,7 +264,7 @@ try {
     ...metrics.disallowedRequired,
   ];
 
-  assertPass(metrics.homeSectionCount >= 10, 'Home renders fewer than 10 data-home-section blocks.', metrics);
+  assertPass(metrics.homeSectionCount >= 6, 'Home renders fewer than 6 approved data-home-section blocks.', metrics);
   assertPass(metrics.approvedHomeEntry, 'Home does not render the user-approved FRACTAL DELAY entry.', metrics);
   assertPass(metrics.genericHeroBlocked, 'Home is using the generic SCI-FI ELECTRONICS / FUTURE SOUND TOOLS entry.', metrics);
   assertPass(metrics.scrollHeight > metrics.innerHeight * 3, 'Home scrollHeight is not at least 3x innerHeight.', metrics);
@@ -274,6 +279,7 @@ try {
   assertPass(metrics.disallowedCodex.length === 0, 'Home contains non-approved codex-created sections.', metrics);
   assertPass(metrics.disallowedRequired.length === 0, 'Home contains non-approved codex-required sections.', metrics);
   assertPass(metrics.duplicateViolations.length === 0, 'Home contains duplicate section pairs that were marked for purge.', metrics);
+  assertPass(metrics.forbiddenContent.length === 0, 'Home contains CHROMA / ctrl4filter content that is not part of the approved Fractal Delay page.', metrics);
   assertPass(metrics.ctaWarnings.length === 0, 'Home contains CTAs that imply real purchase/checkout/download.', metrics);
   assertPass(metrics.brokenInternalLinks.length === 0, 'Home contains broken internal links.', metrics);
   assertPass((metrics.origins['figma-local'] || 0) + (metrics.origins['figma-modified'] || 0) > (metrics.origins['codex-created'] || 0) + (metrics.origins['codex-enhancement'] || 0) + (metrics.origins['codex-required'] || 0), 'Home does not have a clear Figma-origin majority.', metrics);

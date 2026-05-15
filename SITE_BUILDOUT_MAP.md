@@ -11,16 +11,11 @@ This file tracks the local Figma/Figma Make buildout state so future passes do n
 ## Home Current Architecture
 - PromoBar / NavbarAdvanced: mounted globally in `App.tsx`; keep.
 - ProductHeroFigmaHybrid: mounted publicly as the approved FRACTAL DELAY first viewport.
-- FeaturesSection: mounted publicly; local Figma brand/tool statement.
-- ProductsShowcase: mounted publicly; local Figma CHROMA/sound-pack showcase.
-- PluginShowcase: mounted publicly; local Figma ctrl4filter/plugin showcase.
-- ComingSoon: mounted publicly; local Figma roadmap block.
+- PremiumLandingSections: mounted publicly as Fractal Delay philosophy/features/bundle flow.
 - TrustMarquee: mounted publicly; signal/spec confidence strip.
 - DawCompatibilityStrip: mounted publicly as compact trust/support strip.
 - ArchiveTeaser: mounted publicly; Figma/local archive teaser.
 - BrandStatement: mounted publicly; Figma/local editorial brand section.
-- BundleManifesto: mounted publicly; Figma/local commercial collection section.
-- TestimonialsSection: mounted publicly; Figma/local social proof style.
 - Footer: mounted publicly; codex-required because no complete local Figma footer equivalent was found.
 - CookieConsent: mounted globally; technical/compliance requirement.
 - StickyBundleCTA: removed from Home after purge; remains only where explicitly mounted on other routes.
@@ -29,7 +24,9 @@ This file tracks the local Figma/Figma Make buildout state so future passes do n
 - HeroSection: local/Figma candidate; available in `/dev/figma-reference`; not public home.
 - HeroSectionAdvanced: generic local/Figma brand entry; available in dev/reference; not public home after approved FRACTAL DELAY restore.
 - ProductHeroPremium: Codex-created previous hero; not active.
-- PremiumLandingSections: Codex-created simplification; not active.
+- FeaturesSection / ProductsShowcase / PluginShowcase / ComingSoon: removed from public `/` because they show the generic brand cards, CHROMA and ctrl4filter content flagged in the user screenshots. They remain in `/about` and dev/reference only.
+- TestimonialsSection: removed from public `/` because its data includes CHROMA/CTRLFILTER testimonials.
+- BundleManifesto: removed from public `/` to avoid duplicating the Fractal bundle CTA in `PremiumLandingSections`; remains on catalogue/product routes.
 - ProductGrid / AudioDemoSection / HowItWorksSection / PluginComparisonTable: not mounted on Home after purge; catalogue/product-system sections remain available through `/plugins` or dev reference.
 - BrandIntro: Figma asset splash; disabled by config, asset reused in Footer.
 - ComponentGalleryPage: internal route at `/dev/component-gallery` for full visual inventory.
