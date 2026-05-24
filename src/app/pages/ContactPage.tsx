@@ -2,6 +2,7 @@ import { ArrowUpRight, Mail } from 'lucide-react';
 import Footer from '@/app/components/Footer';
 import { siteConfig } from '@/app/config/siteConfig';
 import { useSEO } from '@/app/hooks/useSEO';
+import { seoPages } from '@/app/config/seoConfig';
 
 const contactBlocks = [
   {
@@ -42,10 +43,7 @@ const contactBlocks = [
 ];
 
 export default function ContactPage() {
-  useSEO({
-    title: 'Contact',
-    description: 'Contact SCI-FI ELECTRONICS for support, licensing, collaborations and signal inquiries.'
-  });
+  useSEO(seoPages.contact);
 
   return (
     <>

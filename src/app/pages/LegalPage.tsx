@@ -15,6 +15,7 @@ import { motion } from 'framer-motion';
 import Footer from '@/app/components/Footer';
 import { ArrowLeft, Shield, FileText, Lock, Cookie } from 'lucide-react';
 import { useSEO } from '@/app/hooks/useSEO';
+import { seoKeywords } from '@/app/config/seoConfig';
 
 // ─── Secciones de navegación legal ───────────────────────────
 const LEGAL_SECTIONS = [
@@ -575,6 +576,8 @@ export default function LegalPage() {
   useSEO({
     title: activeSection?.id === 'license' ? 'Legal License' : 'Legal',
     description: 'Legal information, privacy, cookies, terms and license agreement for SCI-FI ELECTRONICS.',
+    keywords: [...seoKeywords.core, 'audio plugin license', 'VST license agreement', 'software license terms'],
+    canonicalPath: `/legal/${section || 'terms'}`,
   });
 
   return (

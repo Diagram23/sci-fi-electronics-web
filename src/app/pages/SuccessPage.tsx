@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import Footer from '@/app/components/Footer';
 import { useSEO } from '@/app/hooks/useSEO';
+import { seoKeywords } from '@/app/config/seoConfig';
 
 // ─── CANVAS PARTICLE BURST ────────────────────────────────────
 function ParticleBurst() {
@@ -150,8 +151,10 @@ function StepCard({
 // ─── MAIN ─────────────────────────────────────────────────────
 export default function SuccessPage() {
   useSEO({
-    title: 'Checkout Confirmation',
+    title: 'Access Request Confirmation',
     description: 'Prepared purchase confirmation view for future SCI-FI ELECTRONICS checkout flows.',
+    keywords: [...seoKeywords.core, 'audio plugin access', 'plugin license confirmation'],
+    canonicalPath: '/success',
   });
 
   const [searchParams] = useSearchParams();

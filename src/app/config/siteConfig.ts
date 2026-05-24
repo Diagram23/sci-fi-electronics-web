@@ -4,9 +4,10 @@ export const HOME_HERO_COMPONENT = 'ProductHeroPremium' as const;
 export const siteConfig = {
   siteName: 'SCI-FI ELECTRONICS',
   brandShortName: 'SFE',
+  siteUrl: 'https://scifielectronics.com',
   tagline: 'Future sound tools',
   description:
-    'Premium audio plugins, sound systems and future-facing tools for underground electronic music producers.',
+    'Premium VST3, AU and AAX audio plugins, sound systems and future-facing production tools for underground electronic music producers.',
   activeProduct: {
     id: 'fractal-delay',
     name: 'FRACTAL DELAY',

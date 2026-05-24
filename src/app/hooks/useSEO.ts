@@ -1,55 +1,149 @@
 /**
- * useSEO - sets document title and essential meta tags
+ * useSEO - sets page title, canonical, social metadata and JSON-LD.
  */
 import { useEffect } from 'react';
-
-const BASE = 'SCI-FI ELECTRONICS';
-const DEFAULT_DESCRIPTION =
-  'Premium audio plugins, sound systems and future-facing tools for underground electronic music producers.';
+import { useLocation } from 'react-router-dom';
+import { absoluteUrl, defaultSeo, organizationSchema, websiteSchema } from '@/app/config/seoConfig';
 
 interface SEOProps {
   title?: string;
   description?: string;
+  keywords?: readonly string[];
+  canonicalPath?: string;
+  image?: string;
+  type?: 'website' | 'article' | 'product';
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-export function useSEO({ title, description }: SEOProps = {}) {
+function upsertMeta(selector: string, create: () => HTMLMetaElement, content: string) {
+  let tag = document.querySelector<HTMLMetaElement>(selector);
+  if (!tag) {
+    tag = create();
+    document.head.appendChild(tag);
+  }
+  tag.content = content;
+}
+
+function upsertLink(rel: string, href: string) {
+  let link = document.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = rel;
+    document.head.appendChild(link);
+  }
+  link.href = href;
+}
+
+function upsertJsonLd(id: string, data: Record<string, unknown> | Record<string, unknown>[]) {
+  let script = document.querySelector<HTMLScriptElement>(`script#${id}`);
+  if (!script) {
+    script = document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(data);
+}
+
+export function useSEO({
+  title,
+  description,
+  keywords,
+  canonicalPath,
+  image,
+  type = 'website',
+  structuredData,
+}: SEOProps = {}) {
+  const location = useLocation();
+
   useEffect(() => {
-    const finalTitle = title ? `${title} — ${BASE}` : `${BASE} — Future Sound Tools`;
-    const finalDescription = description ?? DEFAULT_DESCRIPTION;
+    const finalTitle = title ? `${title} | SCI-FI ELECTRONICS` : defaultSeo.title;
+    const finalDescription = description ?? defaultSeo.description;
+    const finalKeywords = (keywords?.length ? keywords : defaultSeo.keywords).join(', ');
+    const finalCanonical = absoluteUrl(canonicalPath ?? location.pathname);
+    const finalImage = image ?? defaultSeo.image;
 
     document.title = finalTitle;
 
-    let metaDescription = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.name = 'description';
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.content = finalDescription;
+    upsertMeta('meta[name="description"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      return meta;
+    }, finalDescription);
 
-    let ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
-    if (!ogTitle) {
-      ogTitle = document.createElement('meta');
-      ogTitle.setAttribute('property', 'og:title');
-      document.head.appendChild(ogTitle);
-    }
-    ogTitle.content = finalTitle;
+    upsertMeta('meta[name="keywords"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'keywords';
+      return meta;
+    }, finalKeywords);
 
-    let ogDescription = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
-    if (!ogDescription) {
-      ogDescription = document.createElement('meta');
-      ogDescription.setAttribute('property', 'og:description');
-      document.head.appendChild(ogDescription);
-    }
-    ogDescription.content = finalDescription;
+    upsertMeta('meta[name="robots"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      return meta;
+    }, 'index, follow, max-image-preview:large');
 
-    let keywords = document.querySelector<HTMLMetaElement>('meta[name="keywords"]');
-    if (!keywords) {
-      keywords = document.createElement('meta');
-      keywords.name = 'keywords';
-      document.head.appendChild(keywords);
+    upsertMeta('meta[property="og:title"]', () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:title');
+      return meta;
+    }, finalTitle);
+
+    upsertMeta('meta[property="og:description"]', () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:description');
+      return meta;
+    }, finalDescription);
+
+    upsertMeta('meta[property="og:type"]', () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:type');
+      return meta;
+    }, type === 'product' ? 'product' : type);
+
+    upsertMeta('meta[property="og:url"]', () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:url');
+      return meta;
+    }, finalCanonical);
+
+    upsertMeta('meta[property="og:image"]', () => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', 'og:image');
+      return meta;
+    }, finalImage);
+
+    upsertMeta('meta[name="twitter:card"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:card';
+      return meta;
+    }, 'summary_large_image');
+
+    upsertMeta('meta[name="twitter:title"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:title';
+      return meta;
+    }, finalTitle);
+
+    upsertMeta('meta[name="twitter:description"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'twitter:description';
+      return meta;
+    }, finalDescription);
+
+    upsertMeta('meta[name="theme-color"]', () => {
+      const meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      return meta;
+    }, '#030403');
+
+    upsertLink('canonical', finalCanonical);
+    upsertJsonLd('sfe-global-schema', [organizationSchema(), websiteSchema()]);
+
+    if (structuredData) {
+      upsertJsonLd('sfe-page-schema', structuredData);
+    } else {
+      document.querySelector('script#sfe-page-schema')?.remove();
     }
-    keywords.content =
-      'audio plugins, sample packs, halftime, sound design, underground electronic music, sci-fi electronics, VST, production tools';
-  }, [title, description]);
+  }, [canonicalPath, description, image, keywords, location.pathname, structuredData, title, type]);
 }

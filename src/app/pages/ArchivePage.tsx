@@ -15,6 +15,7 @@ import Footer from '@/app/components/Footer';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 import { useSEO } from '@/app/hooks/useSEO';
+import { seoPages } from '@/app/config/seoConfig';
 
 const BANDCAMP_URL = 'https://scifielectronics.bandcamp.com/';
 
@@ -229,10 +230,7 @@ export default function ArchivePage() {
   const [playing, setPlaying] = useState(false);
   const collRef = useRef<HTMLElement>(null);
 
-  useSEO({
-    title: 'Signal Archive',
-    description: 'SCI-FI ELECTRONICS Archive: curated sample packs for sound designers. 120 sources per volume — textures, transients, atmospheres, and more. WAV 24-bit, royalty-free.',
-  });
+  useSEO(seoPages.archive);
 
   const open = useCallback(() => {
     window.open(BANDCAMP_URL, '_blank', 'noopener,noreferrer');

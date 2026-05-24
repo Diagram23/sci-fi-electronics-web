@@ -5,6 +5,7 @@ import { Plus, Minus, Mail, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import { useSEO } from '@/app/hooks/useSEO';
 import Footer from '@/app/components/Footer';
+import { seoPages } from '@/app/config/seoConfig';
 
 // ── Fade-in wrapper ──────────────────────────────────────────────
 function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -311,11 +312,7 @@ const faqData = [
 // PAGE
 // ═══════════════════════════════════════════════════════════════
 export default function FAQPage() {
-  useSEO({
-    title: 'FAQ',
-    description:
-      'SCI-FI ELECTRONICS — Frequently asked questions about licenses, compatibility, downloads, refunds, and technical support.',
-  });
+  useSEO(seoPages.faq);
   const isMobile = useIsMobile();
 
   return (

@@ -10,11 +10,13 @@ import ComingSoon from '@/app/components/ComingSoon';
 import StickyBundleCTA from '@/app/components/StickyBundleCTA';
 import { HOME_ENTRY_SOURCE, HOME_HERO_COMPONENT } from '@/app/config/siteConfig';
 import { useSEO } from '@/app/hooks/useSEO';
+import { bundleProductSchema, fractalDelayProductSchema, seoPages } from '@/app/config/seoConfig';
 
 export default function HomePage() {
   useSEO({
-    description:
-      'Premium audio plugins, sound systems and future-facing tools for underground electronic music producers.'
+    ...seoPages.home,
+    type: 'product',
+    structuredData: [fractalDelayProductSchema(), bundleProductSchema()],
   });
 
   return (

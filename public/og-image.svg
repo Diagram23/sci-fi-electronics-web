@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SCI-FI ELECTRONICS - Fractal Delay</title>
+  <desc id="desc">Premium audio plugins and future sound tools for underground electronic music producers.</desc>
+  <defs>
+    <radialGradient id="jade" cx="68%" cy="42%" r="56%">
+      <stop offset="0%" stop-color="#1A4D4D" stop-opacity="0.42"/>
+      <stop offset="62%" stop-color="#060706" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#030403"/>
+    </radialGradient>
+    <linearGradient id="bronze" x1="0" x2="1">
+      <stop offset="0%" stop-color="#8B7355"/>
+      <stop offset="48%" stop-color="#C7A276"/>
+      <stop offset="100%" stop-color="#8B7355"/>
+    </linearGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#F4F1EA" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#030403"/>
+  <rect width="1200" height="630" fill="url(#jade)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#B8936D" stroke-opacity="0.22"/>
+  <text x="86" y="110" fill="#B8936D" font-family="Consolas, monospace" font-size="18" letter-spacing="8">REFERENCE SIGNAL ARCHITECTURE</text>
+  <text x="84" y="274" fill="#F4F1EA" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="800" letter-spacing="-4">FRACTAL</text>
+  <text x="84" y="392" fill="#F4F1EA" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="800" letter-spacing="-4">DELAY</text>
+  <text x="90" y="450" fill="#C7A276" font-family="Georgia, serif" font-size="34" font-style="italic">Time Manipulation Engine</text>
+  <text x="90" y="514" fill="#9A9994" font-family="Inter, Arial, sans-serif" font-size="24">Premium VST3 / AU / AAX audio plugins for underground electronic music.</text>
+  <g transform="translate(790 176)">
+    <rect x="0" y="0" width="300" height="210" rx="0" fill="#050604" stroke="#B8936D" stroke-opacity="0.3"/>
+    <rect x="0" y="0" width="300" height="28" fill="#15120E"/>
+    <circle cx="20" cy="14" r="5" fill="#C46D57"/>
+    <circle cx="38" cy="14" r="5" fill="#C7A276"/>
+    <circle cx="56" cy="14" r="5" fill="#2DD4BF"/>
+    <g fill="url(#bronze)" opacity="0.75">
+      <rect x="34" y="88" width="20" height="82"/>
+      <rect x="70" y="112" width="20" height="58"/>
+      <rect x="106" y="74" width="20" height="96"/>
+      <rect x="142" y="128" width="20" height="42"/>
+      <rect x="178" y="100" width="20" height="70"/>
+      <rect x="214" y="142" width="20" height="28"/>
+      <rect x="250" y="120" width="20" height="50"/>
+    </g>
+  </g>
+</svg>

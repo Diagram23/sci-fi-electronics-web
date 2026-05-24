@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, Check, Shield, Mail, RefreshCw } from 'lucide-re
 import { useSEO } from '@/app/hooks/useSEO';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import { siteConfig } from '@/app/config/siteConfig';
+import { absoluteUrl, fractalDelayProductSchema, seoKeywords, seoPages } from '@/app/config/seoConfig';
 
 // Per-plugin accent map
 const ACCENT: Record<string, { color: string; rgb: string; visual: PluginVisualVariant }> = {
@@ -39,8 +40,31 @@ export default function PluginDetailPage() {
   const relatedPlugins = getRelatedPlugins(pluginId || '');
 
   useSEO(plugin ? {
-    title: `${plugin.name} — ${plugin.tagline}`,
-    description: plugin.description,
+    title: plugin.id === 'fractal-delay' ? seoPages.fractalDelay.title : `${plugin.name} - ${plugin.tagline}`,
+    description: plugin.id === 'fractal-delay' ? seoPages.fractalDelay.description : plugin.description,
+    keywords: plugin.id === 'fractal-delay' ? seoPages.fractalDelay.keywords : [...seoKeywords.core, plugin.name, plugin.tagline, 'VST plugin'],
+    canonicalPath: `/plugins/${plugin.id}`,
+    type: 'product',
+    structuredData: plugin.id === 'fractal-delay'
+      ? fractalDelayProductSchema()
+      : {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: plugin.name,
+          applicationCategory: 'MultimediaApplication',
+          operatingSystem: plugin.specs.platforms.join(', '),
+          softwareVersion: plugin.specs.formats.join(', '),
+          url: absoluteUrl(`/plugins/${plugin.id}`),
+          description: plugin.description,
+          brand: { '@type': 'Brand', name: siteConfig.siteName },
+          offers: {
+            '@type': 'Offer',
+            price: plugin.price,
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/PreOrder',
+            url: absoluteUrl(`/plugins/${plugin.id}`),
+          },
+        },
   } : { title: 'Plugin Not Found' });
 
   if (!plugin) {

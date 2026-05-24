@@ -7,11 +7,12 @@ import Footer from '@/app/components/Footer';
 import StickyBundleCTA from '@/app/components/StickyBundleCTA';
 import FinalSignalCTA from '@/app/components/FinalSignalCTA';
 import { useSEO } from '@/app/hooks/useSEO';
+import { bundleProductSchema, fractalDelayProductSchema, seoPages } from '@/app/config/seoConfig';
 
 export default function AllPluginsPage() {
   useSEO({
-    title: 'Plugins',
-    description: 'Premium audio plugins and the complete SCI-FI ELECTRONICS signal collection.'
+    ...seoPages.plugins,
+    structuredData: [fractalDelayProductSchema(), bundleProductSchema()],
   });
 
   return (
