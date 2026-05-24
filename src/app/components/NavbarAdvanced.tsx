@@ -70,6 +70,22 @@ export default function NavbarAdvanced({ minimal = false }: NavbarAdvancedProps)
           {minimal ? (
             <div aria-hidden="true" className="hidden md:block" />
           ) : (
+            <div className="justify-self-end">
+              <button
+                type="button"
+                onClick={openCart}
+                title="Open cart"
+                className="relative inline-flex h-10 w-10 items-center justify-center border border-[#B8936D]/20 bg-[#0A0B09]/80 text-[#C7A276] transition hover:border-[#C7A276]/40 hover:bg-[#B8936D]/10 focus:outline-none focus:ring-2 focus:ring-[#C7A276]/35 md:hidden"
+                aria-label={`Open cart, ${items.length} item${items.length === 1 ? '' : 's'}`}
+              >
+                <ShoppingBag className="h-4 w-4" strokeWidth={1.5} />
+                {items.length > 0 && (
+                  <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#C7A276] px-1 font-mono text-[8px] font-bold text-[#060706]">
+                    {items.length}
+                  </span>
+                )}
+              </button>
+
             <div className="hidden items-center justify-end gap-2.5 md:flex">
               <div className="flex h-8 items-center border border-[#B8936D]/16 bg-[#0A0B09]/80 p-0.5">
                 {(['ES', 'EN'] as const).map((item) => (
@@ -112,6 +128,7 @@ export default function NavbarAdvanced({ minimal = false }: NavbarAdvancedProps)
                   </span>
                 )}
               </button>
+            </div>
             </div>
           )}
         </div>

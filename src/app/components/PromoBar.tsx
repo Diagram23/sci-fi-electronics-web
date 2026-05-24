@@ -159,7 +159,7 @@ export default function PromoBar() {
                   minWidth: 0,
                 }}
               >
-                Bundle · <strong style={{ color: '#C49A6C', fontWeight: 600 }}>$349</strong> · Save $107
+                Intro · Bundle <strong style={{ color: '#C49A6C', fontWeight: 600 }}>$349</strong> · Save $107
               </span>
               <motion.button
                 type="button"
