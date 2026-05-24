@@ -686,12 +686,12 @@ export default function CheckoutModal({
                         margin: 0,
                       }}>
                         He leído y acepto los{' '}
-                        <a href="/legal/terminos" target="_blank" rel="noopener noreferrer"
+                        <a href="/legal/terms" target="_blank" rel="noopener noreferrer"
                           style={{ color: '#C49A6C', textDecoration: 'underline', textDecorationColor: 'rgba(196,154,108,0.35)' }}>
                           Términos y Condiciones
                         </a>
                         {' '}y la{' '}
-                        <a href="/legal/privacidad" target="_blank" rel="noopener noreferrer"
+                        <a href="/legal/privacy" target="_blank" rel="noopener noreferrer"
                           style={{ color: '#C49A6C', textDecoration: 'underline', textDecorationColor: 'rgba(196,154,108,0.35)' }}>
                           Política de Privacidad
                         </a>

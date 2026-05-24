@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { X, Zap } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
+import { useCart } from '@/app/context/CartContext';
+import { getCompleteBundleCartItems } from '@/app/lib/commerceItems';
 
 const H_DESKTOP = 38;
 const H_MOBILE = 40;
@@ -16,6 +18,13 @@ export default function PromoBar() {
   });
   const isMobile = useIsMobile();
   const barH = isMobile ? H_MOBILE : H_DESKTOP;
+  const { clearCart, addToCart, openCart } = useCart();
+
+  const handleBundleClick = () => {
+    clearCart();
+    getCompleteBundleCartItems().forEach((item) => addToCart(item));
+    openCart();
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty('--promo-h', visible ? `${barH}px` : '0px');
@@ -99,10 +108,13 @@ export default function PromoBar() {
               >
                 Complete Bundle · <strong style={{ color: '#C49A6C', fontWeight: 600 }}>$349</strong> · Save $107 (23%)
               </span>
-              <motion.a
-                href="#bundle"
+              <motion.button
+                type="button"
+                onClick={handleBundleClick}
                 whileHover={{ color: '#EDD4A4' }}
                 style={{
+                  border: 0,
+                  background: 'transparent',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.72rem',
                   letterSpacing: '0.16em',
@@ -116,7 +128,7 @@ export default function PromoBar() {
                 }}
               >
                 Buy Now -&gt;
-              </motion.a>
+              </motion.button>
             </div>
           )}
 
@@ -149,8 +161,9 @@ export default function PromoBar() {
               >
                 Bundle · <strong style={{ color: '#C49A6C', fontWeight: 600 }}>$349</strong> · Save $107
               </span>
-              <motion.a
-                href="#bundle"
+              <motion.button
+                type="button"
+                onClick={handleBundleClick}
                 whileHover={{ color: '#EDD4A4' }}
                 style={{
                   fontFamily: 'var(--font-mono)',
@@ -170,7 +183,7 @@ export default function PromoBar() {
                 }}
               >
                 Buy
-              </motion.a>
+              </motion.button>
             </div>
           )}
 

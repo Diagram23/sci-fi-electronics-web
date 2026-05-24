@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useIsMobile } from '@/app/hooks/useIsMobile';
 import GoldCTAButton from '@/app/components/GoldCTAButton';
-import { siteConfig } from '@/app/config/siteConfig';
+import { useCart } from '@/app/context/CartContext';
+import { getCompleteBundleCartItems } from '@/app/lib/commerceItems';
 
 const PLUGINS    = ['QUANTUM REVERB', 'FRACTAL DELAY', 'SPECTRAL GATE', 'PLASMA DISTORTION'];
 const INDIVIDUAL = 149 + 129 + 99 + 79;  // 456
@@ -19,6 +20,7 @@ export default function StickyBundleCTA() {
   const [cookieVisible, setCookieVisible] = useState(false);
   const [nearFooter, setNearFooter] = useState(false);
   const isMobile = useIsMobile();
+  const { clearCart, addToCart, openCart } = useCart();
 
   useEffect(() => {
     const hasCookieConsent = () => Boolean(localStorage.getItem('sfx_cookie_consent_v1'));
@@ -46,7 +48,9 @@ export default function StickyBundleCTA() {
   }, []);
 
   const handleBundleRequest = () => {
-    window.location.href = `mailto:${siteConfig.salesEmail}?subject=${encodeURIComponent('Complete Signal Collection access request')}`;
+    clearCart();
+    getCompleteBundleCartItems().forEach((item) => addToCart(item));
+    openCart();
   };
 
   if (dismissed) return null;

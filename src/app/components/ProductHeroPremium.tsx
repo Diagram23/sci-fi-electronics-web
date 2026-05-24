@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, Shield, Download, Repeat, BadgeCheck, Star } from 'lucide-react';
 import PluginWindowMockup from '@/app/components/PluginWindowMockup';
 import { getPluginById } from '@/app/data/pluginsData';
+import { useCart } from '@/app/context/CartContext';
+import { getCompleteBundleCartItems, getFractalDelayCartItem } from '@/app/lib/commerceItems';
 
 const specs = ['192kHz', '32-bit depth', '0ms latency', 'VST3 / AU / AAX'];
 const microBenefits = [
@@ -14,6 +15,18 @@ const microBenefits = [
 
 export default function ProductHeroPremium() {
   const plugin = getPluginById('fractal-delay');
+  const { addToCart, clearCart, openCart } = useCart();
+
+  const handleAcquireFractal = () => {
+    addToCart(getFractalDelayCartItem());
+    openCart();
+  };
+
+  const handleAcquireBundle = () => {
+    clearCart();
+    getCompleteBundleCartItems().forEach((item) => addToCart(item));
+    openCart();
+  };
 
   return (
     <section id="home" className="relative isolate overflow-hidden border-b border-white/[0.065] pt-32 md:pt-[9.75rem]">
@@ -69,18 +82,20 @@ export default function ProductHeroPremium() {
           </div>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={handleAcquireFractal}
               className="group inline-flex min-h-[52px] w-full items-center justify-center border border-[#C7A276]/45 bg-[linear-gradient(135deg,rgba(199,162,118,0.92),rgba(139,115,85,0.78))] px-5 py-3.5 text-center font-mono text-[9px] font-semibold uppercase leading-4 tracking-[0.16em] text-[#060706] shadow-[0_16px_44px_rgba(0,0,0,0.42)] transition duration-300 hover:border-[#E8E1D4]/50 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#C7A276]/55 sm:w-auto sm:px-6 sm:text-[10px] sm:tracking-[0.2em]"
             >
               Acquire Fractal Delay - ${plugin?.price ?? 129}
-            </Link>
-            <Link
-              to="/contact"
+            </button>
+            <button
+              type="button"
+              onClick={handleAcquireBundle}
               className="inline-flex min-h-[52px] w-full items-center justify-center border border-white/[0.095] bg-white/[0.018] px-5 py-3.5 text-center font-mono text-[9px] uppercase leading-4 tracking-[0.16em] text-[#C7A276] transition duration-300 hover:border-[#B8936D]/35 hover:bg-[#B8936D]/[0.055] focus:outline-none focus:ring-2 focus:ring-[#C7A276]/35 sm:w-auto sm:px-6 sm:text-[10px] sm:tracking-[0.2em]"
             >
               Complete Collection - $349
-            </Link>
+            </button>
           </div>
 
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#7F7A72]">

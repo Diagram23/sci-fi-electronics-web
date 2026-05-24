@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-interface CartItem {
+export interface CartItem {
   id: string;
   name: string;
   price: number;
@@ -24,9 +24,28 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [items, setItems] = useState<CartItem[]>(() => {
+    try {
+      const stored = window.localStorage.getItem('sfx_cart_v1');
+      if (!stored) return [];
+      const parsed = JSON.parse(stored) as CartItem[];
+      return Array.isArray(parsed)
+        ? parsed.filter((item) => item && typeof item.id === 'string' && typeof item.price === 'number')
+        : [];
+    } catch {
+      return [];
+    }
+  });
   const [isCartOpen, setIsCartOpen]         = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('sfx_cart_v1', JSON.stringify(items));
+    } catch {
+      // Cart persistence is best-effort only.
+    }
+  }, [items]);
 
   const addToCart = (item: CartItem) => {
     setItems((prev) => {

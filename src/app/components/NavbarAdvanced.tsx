@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingBag, UserRound, X } from 'lucide-react';
+import { useCart } from '@/app/context/CartContext';
 
 const links = [
   { label: 'Inicio', href: '/' },
@@ -16,6 +17,7 @@ export default function NavbarAdvanced({ minimal = false }: NavbarAdvancedProps)
   const [open, setOpen] = useState(false);
   const [lang, setLang] = useState<'ES' | 'EN'>('ES');
   const location = useLocation();
+  const { items, openCart } = useCart();
 
   const renderLink = (item: (typeof links)[number], mobile = false) => {
     const isHome = item.href === '/';
@@ -98,13 +100,17 @@ export default function NavbarAdvanced({ minimal = false }: NavbarAdvancedProps)
 
               <button
                 type="button"
-                disabled
-                aria-disabled="true"
-                title="Cart pending checkout integration"
-                className="inline-flex h-9 w-9 cursor-not-allowed items-center justify-center border border-[#B8936D]/16 bg-[#0A0B09]/80 text-[#8B7355] opacity-70"
-                aria-label="Cart pending checkout integration"
+                onClick={openCart}
+                title="Open cart"
+                className="relative inline-flex h-9 w-9 items-center justify-center border border-[#B8936D]/20 bg-[#0A0B09]/80 text-[#C7A276] transition hover:border-[#C7A276]/40 hover:bg-[#B8936D]/10 focus:outline-none focus:ring-2 focus:ring-[#C7A276]/35"
+                aria-label={`Open cart, ${items.length} item${items.length === 1 ? '' : 's'}`}
               >
                 <ShoppingBag className="h-4 w-4" strokeWidth={1.5} />
+                {items.length > 0 && (
+                  <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-[#C7A276] px-1 font-mono text-[8px] font-bold text-[#060706]">
+                    {items.length}
+                  </span>
+                )}
               </button>
             </div>
           )}
@@ -115,9 +121,16 @@ export default function NavbarAdvanced({ minimal = false }: NavbarAdvancedProps)
             <div className="flex flex-col gap-5">
               {links.map((item) => renderLink(item, true))}
               {!minimal && (
-                <a href="/contact" className="mt-2 inline-flex min-h-11 items-center justify-center border border-[#B8936D]/35 bg-[#B8936D]/10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#C7A276]" onClick={() => setOpen(false)}>
-                  Contact Sales
-                </a>
+                <button
+                  type="button"
+                  className="mt-2 inline-flex min-h-11 items-center justify-center border border-[#B8936D]/35 bg-[#B8936D]/10 font-mono text-[10px] uppercase tracking-[0.22em] text-[#C7A276]"
+                  onClick={() => {
+                    setOpen(false);
+                    openCart();
+                  }}
+                >
+                  Cart {items.length > 0 ? `(${items.length})` : ''}
+                </button>
               )}
             </div>
           </div>

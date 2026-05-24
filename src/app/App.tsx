@@ -16,6 +16,7 @@ import CheckoutModal from '@/app/components/CheckoutModal';
 import { CartProvider, useCart } from '@/app/context/CartContext';
 import { LanguageProvider } from '@/app/context/LanguageContext';
 import { siteConfig } from '@/app/config/siteConfig';
+import { isCompleteBundle } from '@/app/lib/commerceItems';
 
 const AllPluginsPage = lazy(() => import('@/app/pages/AllPluginsPage'));
 const ArchivePage = lazy(() => import('@/app/pages/ArchivePage'));
@@ -30,6 +31,7 @@ const FigmaOriginalReconstructionPage = lazy(() => import('@/app/pages/FigmaOrig
 
 function CommerceOverlays() {
   const { isCheckoutOpen, closeCheckout, items } = useCart();
+  const checkoutIsBundle = isCompleteBundle(items);
 
   return (
     <>
@@ -38,7 +40,7 @@ function CommerceOverlays() {
         isOpen={isCheckoutOpen}
         onClose={closeCheckout}
         items={items}
-        isBundle={items.length > 1}
+        isBundle={checkoutIsBundle}
       />
     </>
   );

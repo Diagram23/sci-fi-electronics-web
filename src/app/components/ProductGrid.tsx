@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Box, Music2, Star } from 'lucide-react';
 import { CHROMA, CTRL4FILTER } from '@/app/data/productsData';
-import { siteConfig } from '@/app/config/siteConfig';
+import { useCart } from '@/app/context/CartContext';
+import { getChromaCartItem, getCtrl4FilterCartItem } from '@/app/lib/commerceItems';
 
 type CatalogCard = {
   kind: 'plugin' | 'sample';
@@ -72,13 +73,15 @@ const accentMap = {
   },
 };
 
-function requestProductAccess(name: string) {
-  window.location.href = `mailto:${siteConfig.salesEmail}?subject=${encodeURIComponent(`Access request - ${name}`)}`;
-}
-
 function ProductCard({ card }: { card: CatalogCard }) {
   const accent = accentMap[card.accent];
   const Icon = card.kind === 'plugin' ? Box : Music2;
+  const { addToCart, openCart } = useCart();
+
+  const handleBuyNow = () => {
+    addToCart(card.kind === 'plugin' ? getCtrl4FilterCartItem() : getChromaCartItem());
+    openCart();
+  };
 
   return (
     <article
@@ -166,7 +169,7 @@ function ProductCard({ card }: { card: CatalogCard }) {
             <div className="flex items-center gap-5">
               <button
                 type="button"
-                onClick={() => requestProductAccess(card.name)}
+                onClick={handleBuyNow}
                 className="min-h-[42px] rounded-lg border px-6 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] transition hover:brightness-110 focus:outline-none focus:ring-2"
                 style={{
                   borderColor: `rgba(${accent.rgb},0.38)`,
