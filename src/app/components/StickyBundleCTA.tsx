@@ -33,16 +33,24 @@ export default function StickyBundleCTA() {
     };
 
     updateChromeState();
-    const handleScroll = () => updateChromeState();
+    let raf = 0;
+    const scheduleUpdate = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        updateChromeState();
+      });
+    };
     const handleConsentChange = () => updateChromeState();
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
     window.addEventListener('sfx-cookie-consent-change', handleConsentChange);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
       window.removeEventListener('sfx-cookie-consent-change', handleConsentChange);
     };
   }, []);

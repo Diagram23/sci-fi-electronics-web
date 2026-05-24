@@ -61,7 +61,7 @@
 
   html {
     font-size: var(--font-size);
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     overflow-x: hidden;
     overflow-y: auto;
     min-height: 100%;
@@ -98,10 +98,6 @@
   canvas,
   video {
     max-width: 100%;
-  }
-
-  body:has([data-custom-cursor='true']) * {
-    cursor: none !important;
   }
 
   ::selection {

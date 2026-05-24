@@ -4,8 +4,6 @@
  * Fila 2: Especificaciones técnicas del producto (verificables)
  * NOTA: stats de usuarios se añadirán post-lanzamiento con datos reales.
  */
-import { motion } from 'framer-motion';
-
 const daws = [
   { name: 'Ableton Live',  note: 'FULL SUPPORT'  },
   { name: 'Logic Pro X',   note: 'FULL SUPPORT'  },
@@ -36,11 +34,9 @@ const specs = [
 function MarqueeRow({
   items,
   direction = 'left',
-  duration = 40,
 }: {
   items: { primary: string; secondary: string }[];
   direction?: 'left' | 'right';
-  duration?: number;
 }) {
   const doubled = [...items, ...items, ...items];
 
@@ -58,10 +54,12 @@ function MarqueeRow({
         pointerEvents: 'none',
       }} />
 
-      <motion.div
-        animate={{ x: direction === 'left' ? ['0%', '-33.333%'] : ['-33.333%', '0%'] }}
-        transition={{ duration, repeat: Infinity, ease: 'linear' }}
-        style={{ display: 'flex', width: 'max-content' }}
+      <div
+        style={{
+          display: 'flex',
+          width: 'max-content',
+          transform: direction === 'right' ? 'translateX(-12%)' : 'translateX(0)',
+        }}
       >
         {doubled.map((item, i) => (
           <div
@@ -96,7 +94,7 @@ function MarqueeRow({
             }} />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -118,7 +116,7 @@ export default function TrustMarquee() {
         paddingTop: '0.85rem', paddingBottom: '0.85rem',
         background: 'rgba(8,6,4,0.7)',
       }}>
-        <MarqueeRow items={dawItems} direction="left" duration={38} />
+        <MarqueeRow items={dawItems} direction="left" />
       </div>
 
       {/* Separator */}
@@ -132,7 +130,7 @@ export default function TrustMarquee() {
         paddingTop: '0.85rem', paddingBottom: '0.85rem',
         background: 'rgba(6,5,3,0.7)',
       }}>
-        <MarqueeRow items={specItems} direction="right" duration={44} />
+        <MarqueeRow items={specItems} direction="right" />
       </div>
 
       {/* Hairline bottom */}

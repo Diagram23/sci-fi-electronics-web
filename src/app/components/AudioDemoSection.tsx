@@ -246,6 +246,13 @@ function WaveformCanvas({
       timeRef.current = t;
     };
 
+    if (!siteConfig.audioDemosEnabled) {
+      draw(waveType === 'delay' ? 1.4 : 0.8);
+      return () => {
+        cancelAnimationFrame(rafRef.current);
+      };
+    }
+
     let lastTime = 0;
     const animate = (ts: number) => {
       if (ts - lastTime > 16) {

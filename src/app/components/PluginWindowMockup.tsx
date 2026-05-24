@@ -228,9 +228,10 @@ export default function PluginWindowMockup({ variant, pluginName, accentColor, a
 
   useEffect(() => {
     const id = setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
       setVuL(p => Math.min(0.93, Math.max(0.06, p + (Math.random() - 0.48) * 0.2)));
       setVuR(p => Math.min(0.93, Math.max(0.06, p + (Math.random() - 0.52) * 0.2)));
-    }, 110);
+    }, 700);
     return () => clearInterval(id);
   }, []);
 
