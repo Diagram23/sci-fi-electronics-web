@@ -8,29 +8,29 @@ La entrada aprobada de `/` es el hero de FRACTAL DELAY de la captura del usuario
 
 ## Current Public Home Sequence
 
-The screenshots flagged `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, and `ComingSoon` as not belonging to the approved page because they introduce generic brand cards, CHROMA, and ctrl4filter. Those sections are removed from public `/` and remain only in `/about` or dev/reference routes.
+Update 2026-05-24: the full screenshot set `pagina 1.png` through `pagina 9.png` is now the active visual source-of-truth. It includes the FRACTAL DELAY first viewport, DAW compatibility, product catalogue cards, archive, audio demo, testimonials, coming soon/newsletter, footer, and sticky bundle bar. The previous purge that removed CHROMA/ctrl4filter/ComingSoon from `/` is superseded by this source-of-truth.
 
 | Order | data-home-section | Component | Path | Origin | Public Decision | Reason | CTA/Link Status |
 |---:|---|---|---|---|---|---|---|
-| 1 | `hero` | `ProductHeroFigmaHybrid` | `src/app/components/ProductHeroFigmaHybrid.tsx` | codex-enhancement | keep | User-approved FRACTAL DELAY entry with PromoBar/full Navbar context, plugin mockup, specs, and collection CTA. | CTAs route to `/contact`; no fake checkout. |
-| 2 | `fractal-signal-system` | `PremiumLandingSections` | `src/app/components/PremiumLandingSections.tsx` | codex-enhancement | keep | Fractal Delay philosophy, signal features, and bundle CTA. Replaces CHROMA/ctrl4filter content with product-relevant sections. | Contact/bundle CTA only. |
-| 3 | `trust-marquee` | `TrustMarquee` | `src/app/components/TrustMarquee.tsx` | figma-local | keep | Compact compatibility/spec confidence strip. | No checkout. |
-| 4 | `compatibility` | `DawCompatibilityStrip` | `src/app/components/DawCompatibilityStrip.tsx` | figma-local | keep | DAW compatibility proof for plugin context. | No checkout. |
-| 5 | `archive-teaser` | `ArchiveTeaser` | `src/app/components/ArchiveTeaser.tsx` | figma-local | keep | Links to archive/editorial route without CHROMA/ctrl4filter product cards. | Internal `/archive` link. |
-| 6 | `brand-statement` | `BrandStatement` | `src/app/components/BrandStatement.tsx` | figma-local | keep | Editorial brand statement that does not introduce CHROMA/ctrl4filter catalogue cards. | No checkout. |
-| 7 | `footer` | `Footer` | `src/app/components/Footer.tsx` | codex-required | keep | Required global footer; no complete local Figma footer equivalent found. | Legal/contact links checked. |
+| 1 | `hero` | `ProductHeroPremium` | `src/app/components/ProductHeroPremium.tsx` | codex-enhancement | keep | Closest local implementation to screenshot #1: FRACTAL DELAY serif hero, PromoBar/full Navbar context, plugin mockup, specs, and collection CTA. | CTAs route to `/contact` or `#bundle`; no checkout provider is connected. |
+| 2 | `compatibility` | `DawCompatibilityStrip` | `src/app/components/DawCompatibilityStrip.tsx` | figma-local | keep | Matches screenshot #2: "Works in every major DAW" compatibility proof. | No checkout. |
+| 3 | `product-grid` | `ProductGrid` | `src/app/components/ProductGrid.tsx` | figma-local | keep | Matches screenshots #3/#4 catalogue/product-card section including CHROMA/CTRLFILTER content. | Product access routes to contact fallback. |
+| 4 | `trust-marquee` | `TrustMarquee` | `src/app/components/TrustMarquee.tsx` | figma-local | keep | Matches screenshot #4 two-line moving trust/spec strip. | No checkout. |
+| 5 | `archive-teaser` | `ArchiveTeaser` | `src/app/components/ArchiveTeaser.tsx` | figma-local | keep | Matches screenshot #5 archive editorial section. | Internal `/archive` link/contact fallback. |
+| 6 | `audio-demo` | `AudioDemoSection` | `src/app/components/AudioDemoSection.tsx` | figma-local | keep | Matches screenshot #6 "Hear the Difference" section; banner states waveforms are simulated. | No real audio delivery promised. |
+| 7 | `testimonials` | `TestimonialsSection` | `src/app/components/TestimonialsSection.tsx` | figma-local | keep | Matches screenshot #7 testimonial layout. | No checkout. |
+| 8 | `coming-soon` | `ComingSoon` | `src/app/components/ComingSoon.tsx` | figma-local | keep | Matches screenshot #8 Membrana/newsletter section. | Newsletter UI remains visual/local only until service integration. |
+| 9 | `footer` | `Footer` | `src/app/components/Footer.tsx` | codex-required | keep | Matches screenshot #9 footer architecture; no complete separate Figma footer source file found. | Legal/contact links checked. |
 
 ## Removed From Public Home
 
 | Component | Reason | Current Location |
 |---|---|---|
-| `FeaturesSection` | Generic brand cards shown in user screenshots; not part of approved Fractal Delay page flow. | `/about`, dev/reference |
-| `ProductsShowcase` | Introduces CHROMA sample-pack content flagged by user. | `/about`, dev/reference |
-| `PluginShowcase` | Introduces ctrl4filter content flagged by user. | `/about`, dev/reference |
-| `ComingSoon` | Tied to ctrl4filter roadmap; not part of approved Fractal Delay Home. | `/about`, dev/reference |
-| `TestimonialsSection` | Contains CHROMA/CTRLFILTER testimonial content; removed from `/`. | dev/reference |
-| `BundleManifesto` | Duplicated by the Fractal-focused bundle CTA inside `PremiumLandingSections`. | `/plugins`, dev/reference |
+| `PremiumLandingSections` | Codex-created Fractal continuation that does not appear in the screenshot set and created the unrelated cards shown by the user. | Dev/reference only |
+| `BrandStatement` | Good brand block but not present in the supplied final Home screenshots. | Dev/reference only |
+| `FeaturesSection` / `ProductsShowcase` / `PluginShowcase` | Kept out of `/` because `ProductGrid` is the screenshot-matching catalogue section. | `/about`, dev/reference |
+| `FinalSignalCTA` | Codex-created duplicate of sticky/footer commercial CTA. | Dev/reference only |
 
 ## Verification Contract
 
-`scripts/verify-public-home.mjs` fails if public `/` does not contain the approved FRACTAL DELAY entry, if `HeroSectionAdvanced` is used as the public first hero, if `CHROMA` or `ctrl4filter` appear in Home text, if there is horizontal overflow, if required section metadata is missing, or if internal links break.
+`scripts/verify-public-home.mjs` fails if public `/` does not contain the approved FRACTAL DELAY entry, if `HeroSectionAdvanced` is used as the public first hero, if the screenshot sequence sections are missing, if there is horizontal overflow, if required section metadata is missing, or if internal links break.

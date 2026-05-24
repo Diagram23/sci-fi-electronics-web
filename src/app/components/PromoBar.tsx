@@ -115,7 +115,7 @@ export default function PromoBar() {
                   whiteSpace: 'nowrap',
                 }}
               >
-                Request Access -&gt;
+                Buy Now -&gt;
               </motion.a>
             </div>
           )}
@@ -169,7 +169,7 @@ export default function PromoBar() {
                   lineHeight: 1.5,
                 }}
               >
-                Request
+                Buy
               </motion.a>
             </div>
           )}

@@ -50,7 +50,7 @@ export default function ProductHeroPremium() {
 
           <div className="mt-7 flex max-w-[530px] flex-wrap items-center gap-x-3 gap-y-2 border-y border-white/[0.07] py-3">
             {specs.map((spec) => (
-              <span key={spec} className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#9A9994] before:mr-2 before:text-[#14B8A6] before:content-['•']">
+              <span key={spec} className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#9A9994] before:mr-2 before:text-[#14B8A6] before:content-['+']">
                 {spec}
               </span>
             ))}
@@ -73,18 +73,18 @@ export default function ProductHeroPremium() {
               to="/contact"
               className="group inline-flex min-h-[52px] w-full items-center justify-center border border-[#C7A276]/45 bg-[linear-gradient(135deg,rgba(199,162,118,0.92),rgba(139,115,85,0.78))] px-5 py-3.5 text-center font-mono text-[9px] font-semibold uppercase leading-4 tracking-[0.16em] text-[#060706] shadow-[0_16px_44px_rgba(0,0,0,0.42)] transition duration-300 hover:border-[#E8E1D4]/50 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#C7A276]/55 sm:w-auto sm:px-6 sm:text-[10px] sm:tracking-[0.2em]"
             >
-              Acquire Fractal Delay — ${plugin?.price ?? 129}
+              Acquire Fractal Delay - ${plugin?.price ?? 129}
             </Link>
             <Link
               to="/contact"
               className="inline-flex min-h-[52px] w-full items-center justify-center border border-white/[0.095] bg-white/[0.018] px-5 py-3.5 text-center font-mono text-[9px] uppercase leading-4 tracking-[0.16em] text-[#C7A276] transition duration-300 hover:border-[#B8936D]/35 hover:bg-[#B8936D]/[0.055] focus:outline-none focus:ring-2 focus:ring-[#C7A276]/35 sm:w-auto sm:px-6 sm:text-[10px] sm:tracking-[0.2em]"
             >
-              Complete Collection — $349
+              Complete Collection - $349
             </Link>
           </div>
 
           <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.22em] text-[#7F7A72]">
-            Secure Checkout · Instant Download
+            Secure Checkout | Instant Download
           </p>
         </motion.div>
 

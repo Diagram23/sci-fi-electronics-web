@@ -10,35 +10,36 @@ This file tracks the local Figma/Figma Make buildout state so future passes do n
 
 ## Home Current Architecture
 - PromoBar / NavbarAdvanced: mounted globally in `App.tsx`; keep.
-- ProductHeroFigmaHybrid: mounted publicly as the approved FRACTAL DELAY first viewport.
-- PremiumLandingSections: mounted publicly as Fractal Delay philosophy/features/bundle flow.
-- TrustMarquee: mounted publicly; signal/spec confidence strip.
-- DawCompatibilityStrip: mounted publicly as compact trust/support strip.
+- ProductHeroPremium: mounted publicly as the approved FRACTAL DELAY first viewport because it matches screenshot #1 most closely.
+- DawCompatibilityStrip: mounted publicly as the screenshot #2 DAW compatibility section.
+- ProductGrid: mounted publicly as the screenshot #3/#4 catalogue/product-card section.
+- TrustMarquee: mounted publicly as the screenshot #4 moving trust/spec strip.
 - ArchiveTeaser: mounted publicly; Figma/local archive teaser.
-- BrandStatement: mounted publicly; Figma/local editorial brand section.
+- AudioDemoSection: mounted publicly as screenshot #6 signal/audio preview.
+- TestimonialsSection: mounted publicly as screenshot #7 social proof section.
+- ComingSoon: mounted publicly as screenshot #8 Membrana/newsletter section.
 - Footer: mounted publicly; codex-required because no complete local Figma footer equivalent was found.
 - CookieConsent: mounted globally; technical/compliance requirement.
-- StickyBundleCTA: removed from Home after purge; remains only where explicitly mounted on other routes.
+- StickyBundleCTA: mounted on Home because screenshots #3-#9 show the bottom bundle bar.
 
 ## Available But Not Primary Home Sections
 - HeroSection: local/Figma candidate; available in `/dev/figma-reference`; not public home.
 - HeroSectionAdvanced: generic local/Figma brand entry; available in dev/reference; not public home after approved FRACTAL DELAY restore.
-- ProductHeroPremium: Codex-created previous hero; not active.
-- FeaturesSection / ProductsShowcase / PluginShowcase / ComingSoon: removed from public `/` because they show the generic brand cards, CHROMA and ctrl4filter content flagged in the user screenshots. They remain in `/about` and dev/reference only.
-- TestimonialsSection: removed from public `/` because its data includes CHROMA/CTRLFILTER testimonials.
+- ProductHeroFigmaHybrid: Codex-created previous hero; kept as dev/reference fallback only.
+- FeaturesSection / ProductsShowcase / PluginShowcase: not mounted on `/` because `ProductGrid` is the screenshot-matching catalogue section.
 - BundleManifesto: removed from public `/` to avoid duplicating the Fractal bundle CTA in `PremiumLandingSections`; remains on catalogue/product routes.
-- ProductGrid / AudioDemoSection / HowItWorksSection / PluginComparisonTable: not mounted on Home after purge; catalogue/product-system sections remain available through `/plugins` or dev reference.
+- HowItWorksSection / PluginComparisonTable: remain available through `/plugins` or dev reference; they are not visible in the supplied Home screenshots.
 - BrandIntro: Figma asset splash; disabled by config, asset reused in Footer.
 - ComponentGalleryPage: internal route at `/dev/component-gallery` for full visual inventory.
 - FigmaOriginalReconstructionPage: internal route at `/dev/figma-original-reconstruction` for local export reconstruction.
 
 ## Page Ownership
-- `/`: source-of-truth local Figma Home sequence after purge.
+- `/`: source-of-truth Home sequence from the supplied screenshot set: Fractal hero, compatibility, catalogue, trust strip, archive, audio demo, testimonials, coming soon, footer.
 - `/plugins`: catalogue narrative using ProductGrid, AudioDemoSection, comparison, bundle and final CTA.
 - `/plugins/fractal-delay`: product detail route; keeps generated product detail structure with contact fallback.
 - `/archive`: editorial/technical archive route; archive access copy corrected.
 - `/contact`: premium contact route with General, Support, Sales/Licensing, Collaborations, Press/Archive.
-- `/about`: public brand/product-direction route. Still includes `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, and `ComingSoon`, but these are no longer hidden there only; they are mounted on `/`.
+- `/about`: public brand/product-direction route. Still includes `FeaturesSection`, `ProductsShowcase`, `PluginShowcase`, and `ComingSoon` as legacy/reference narrative.
 - `/faq`: existing premium FAQ page; polish only.
 - `/success`: future checkout confirmation placeholder; honest by design.
 - `/legal/*`: legal layouts; keep separate license/cookies/privacy/terms.
@@ -64,7 +65,7 @@ This file tracks the local Figma/Figma Make buildout state so future passes do n
 
 ## Mount Decisions
 - Keep Figma/local sections mounted and polish in place.
-- Keep `HeroSectionAdvanced` as public Home hero until a newer Figma export proves another source-of-truth.
+- Keep `ProductHeroPremium` as public Home hero because it matches the supplied FRACTAL DELAY screenshot better than the other local hero candidates.
 - Keep checkout disabled and route commercial CTAs to contact until a real provider is connected.
 - Keep BrandIntro disabled by default; reuse the asset as brand texture/emblem.
 - Keep `buildout.css` as a limited integration layer only; do not use it as a substitute for mounting real Figma components.

@@ -115,7 +115,7 @@ export default function StickyBundleCTA() {
                 fontSize="0.78rem"
                 letterSpacing="0.18em"
               >
-                Contact Sales
+                Buy Bundle
               </GoldCTAButton>
 
               {/* Garantías — compactas en columna */}
@@ -127,7 +127,7 @@ export default function StickyBundleCTA() {
                     letterSpacing: '0.1em', textTransform: 'uppercase',
                     color: 'rgba(27,107,90,0.65)', whiteSpace: 'nowrap',
                   }}>
-                    Contact
+                    Instant
                   </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -137,7 +137,7 @@ export default function StickyBundleCTA() {
                     letterSpacing: '0.1em', textTransform: 'uppercase',
                     color: 'rgba(196,154,108,0.4)', whiteSpace: 'nowrap',
                   }}>
-                    Fallback
+                    Access
                   </span>
                 </div>
               </div>
@@ -227,7 +227,7 @@ export default function StickyBundleCTA() {
                   fontSize="0.78rem"
                   letterSpacing="0.18em"
                 >
-                  Contact Sales
+                  Buy Bundle
                 </GoldCTAButton>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
@@ -238,7 +238,7 @@ export default function StickyBundleCTA() {
                       letterSpacing: '0.14em', textTransform: 'uppercase',
                       color: 'rgba(27,107,90,0.65)',
                     }}>
-                      Contact Fallback
+                      Instant Download
                     </span>
                   </div>
                 </div>

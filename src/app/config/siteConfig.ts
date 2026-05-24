@@ -1,5 +1,5 @@
 export const HOME_ENTRY_SOURCE = 'user-approved-fractal-delay-entry' as const;
-export const HOME_HERO_COMPONENT = 'ProductHeroFigmaHybrid' as const;
+export const HOME_HERO_COMPONENT = 'ProductHeroPremium' as const;
 
 export const siteConfig = {
   siteName: 'SCI-FI ELECTRONICS',
@@ -20,6 +20,7 @@ export const siteConfig = {
     price: 349,
     compareAtPrice: 456,
   },
+  figmaCatalogProducts: ['CHROMA', 'ctrl4filter'],
   legacyFigmaProducts: ['CHROMA', 'ctrl4filter'],
   supportEmail: 'support@scifielectronics.com',
   salesEmail: 'sales@scifielectronics.com',

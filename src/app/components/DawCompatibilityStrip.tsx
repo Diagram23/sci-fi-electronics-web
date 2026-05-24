@@ -133,13 +133,13 @@ export default function DawCompatibilityStrip() {
               lineHeight: 1.1,
               margin: 0,
             }}>
-              Format-ready for <span style={{
+              Works in <span style={{
                 fontStyle: 'italic',
                 background: `linear-gradient(135deg, ${AMBER} 0%, #E8C99A 50%, #B8936D 100%)`,
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-              }}>major DAWs</span>
+              }}>every major DAW</span>
             </h3>
           </div>
 

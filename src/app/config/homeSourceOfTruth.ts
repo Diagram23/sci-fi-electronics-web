@@ -1,8 +1,8 @@
 export const HOME_SOURCE_OF_TRUTH = {
   approvedEntry: 'fractal-delay-commercial-hero',
-  heroComponent: 'ProductHeroFigmaHybrid',
-  fallbackHeroComponent: 'ProductHeroPremium',
+  heroComponent: 'ProductHeroPremium',
+  fallbackHeroComponent: 'ProductHeroFigmaHybrid',
   forbiddenPublicHero: 'HeroSectionAdvanced',
   reason:
-    'User-approved first screenshot shows the FRACTAL DELAY commercial hero with PromoBar, full Navbar, plugin mockup, and Fractal Delay / Complete Collection CTAs as the public home entry.',
+    'User-approved Figma screenshot set shows the FRACTAL DELAY commercial hero followed by compatibility, product catalog, archive, audio demo, testimonials, coming soon, and footer sections as the public home.',
 } as const;

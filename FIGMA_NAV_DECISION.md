@@ -14,7 +14,7 @@ Scope: local repo/export only. The current online Figma navigation cannot be ver
 |---|---|---|---|---|---|
 | `Navbar` | `src/app/components/Navbar.tsx` | unknown / legacy local | dev/reference only | `Home`, `Plugins`, `Features`, `Membrana`, `Buy Now` | Do not use publicly. It includes cyan/blue/purple CTA styling and a `Buy Now` affordance that implies commerce. |
 | `NavbarAdvanced` | `src/app/components/NavbarAdvanced.tsx` | codex-enhancement / shell | global public shell in `src/app/App.tsx` | `Inicio`, `Plugins`, `Archivo`, ES/EN, disabled account, disabled cart | Keep as codex-required shell until a newer Figma export provides a complete nav. It matches the approved screenshot more closely than minimal mode and keeps fake auth/cart disabled. |
-| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | global public shell in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle - $349 - Save $107`, `Request Access` | Visible on `/` because the approved screenshot includes it. It points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
+| `PromoBar` | `src/app/components/PromoBar.tsx` | codex-enhancement / commercial shell | global public shell in `src/app/App.tsx` | `Intro Pricing Active`, `Complete Bundle - $349 - Save $107`, `Buy Now` | Visible on `/` because the supplied Figma screenshots include it. It points to `#bundle`, does not start checkout, and feeds navbar offset via `--promo-h`. |
 
 ## Labels Current vs Local Candidates
 
@@ -22,7 +22,7 @@ Scope: local repo/export only. The current online Figma navigation cannot be ver
 |---|---|---|---|
 | Primary nav | `Inicio`, `Plugins`, `Archivo` | `Home`, `Plugins`, `Features`, `Membrana` in `Navbar.tsx` | Current nav is shorter, route-safe, and matches the approved screenshot language. |
 | Logo | `SFE` / `SCI-FI ELECTRONICS` | `SCI-FI` text logo | Current shell is closer to the approved screenshot and brand emblem/footer system. |
-| Commerce CTA | disabled cart/account + promo `Request Access` | `Buy Now` | Current shell is more honest because checkout/auth are not connected. |
+| Commerce CTA | disabled cart/account + promo `Buy Now` anchored to bundle/contact fallback | `Buy Now` | Current shell matches the screenshot while avoiding a connected checkout flow. |
 
 ## Why `NavbarAdvanced` Remains Public
 
