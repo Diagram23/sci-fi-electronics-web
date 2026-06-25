@@ -1,44 +1,57 @@
-import Stripe from 'stripe';
+# SCI-FI ELECTRONICS - Vercel deployment
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
-});
+This project is a React/Vite static site.
 
-export default async function handler(req: any, res: any) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+## Recommended Vercel settings
 
-  const { items, email, isBundle } = req.body;
+- Framework Preset: `Vite`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Node version: Vercel default is acceptable for this project.
 
-  // Mapea IDs a Price IDs de Stripe
-  const priceIds: Record<string, string> = {
-    'quantum-reverb': 'price_xxx', // Reemplaza con tus Price IDs reales
-    'fractal-delay': 'price_yyy',
-    'spectral-gate': 'price_zzz',
-    'plasma-distortion': 'price_aaa',
-    'bundle': 'price_bbb',
-  };
+The `vercel.json` file already includes SPA rewrites so these routes work on refresh:
 
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      customer_email: email,
-      line_items: items.map((item: any) => ({
-        price: isBundle ? priceIds['bundle'] : priceIds[item.id],
-        quantity: 1,
-      })),
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_URL}/plugins`,
-      metadata: {
-        items: JSON.stringify(items.map((i: any) => i.id)),
-        email: email,
-      },
-    });
+- `/`
+- `/plugins`
+- `/plugins/fractal-delay`
+- `/archive`
+- `/contact`
+- `/faq`
+- `/success`
+- `/legal/cookies`
+- `/legal/privacy`
+- `/legal/terms`
+- `/legal/license`
 
-    res.status(200).json({ id: session.id });
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-}
+## Deploy through GitHub
+
+1. Push this project to a GitHub repository.
+2. Open Vercel and choose `Add New Project`.
+3. Import the GitHub repository.
+4. Confirm the settings above.
+5. Deploy.
+
+## Deploy with Vercel CLI
+
+From the project root:
+
+```bash
+npm install
+npm run build
+npm install -g vercel
+vercel login
+vercel
+vercel --prod
+```
+
+Use the preview URL from `vercel` for review, then `vercel --prod` for the public production URL.
+
+## Current limitations
+
+- Checkout is not connected.
+- Auth is not connected.
+- Sanity CMS is present in the project but is not required for the static site build.
+- Audio demos are visual/placeholder unless real audio files are added.
+
+Do not present those flows as live production features until they are connected.
