@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import NavbarAdvanced from '@/app/components/NavbarAdvanced';
 import PromoBar from '@/app/components/PromoBar';
 import HomePage from '@/app/pages/HomePage';
@@ -94,12 +94,14 @@ function AppShell() {
 }
 
 export default function App() {
+  const Router = window.location.protocol === 'file:' ? HashRouter : BrowserRouter;
+
   return (
     <LanguageProvider>
       <CartProvider>
-        <BrowserRouter>
+        <Router>
           <AppShell />
-        </BrowserRouter>
+        </Router>
       </CartProvider>
     </LanguageProvider>
   );
