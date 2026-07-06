@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import NavbarAdvanced from '@/app/components/NavbarAdvanced';
 import PromoBar from '@/app/components/PromoBar';
 import HomePage from '@/app/pages/HomePage';
@@ -22,6 +22,7 @@ const SuccessPage = lazy(() => import('@/app/pages/SuccessPage'));
 const DevFigmaReferencePage = lazy(() => import('@/app/pages/DevFigmaReferencePage'));
 const ComponentGalleryPage = lazy(() => import('@/app/pages/ComponentGalleryPage'));
 const FigmaOriginalReconstructionPage = lazy(() => import('@/app/pages/FigmaOriginalReconstructionPage'));
+const MembranaOSPage = lazy(() => import('@/app/pages/MembranaOSPage'));
 
 function CommerceOverlays() {
   const { isCheckoutOpen, closeCheckout, items } = useCart();
@@ -56,10 +57,13 @@ function RouteFallback() {
 }
 
 function AppShell() {
+  const location = useLocation();
+  const isImmersiveRoute = location.pathname.startsWith('/membrana-os');
+
   return (
     <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
-      <PromoBar />
-      <NavbarAdvanced />
+      {!isImmersiveRoute && <PromoBar />}
+      {!isImmersiveRoute && <NavbarAdvanced />}
 
       <main className="relative z-10">
         <Suspense fallback={<RouteFallback />}>
@@ -71,6 +75,7 @@ function AppShell() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/membrana-os" element={<MembranaOSPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/legal/:section" element={<LegalPage />} />
             {siteConfig.enableDevFigmaReference && (
@@ -87,8 +92,8 @@ function AppShell() {
         </Suspense>
       </main>
 
-      <CommerceOverlays />
-      <CookieConsent />
+      {!isImmersiveRoute && <CommerceOverlays />}
+      {!isImmersiveRoute && <CookieConsent />}
     </div>
   );
 }
