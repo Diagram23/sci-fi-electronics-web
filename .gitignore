@@ -12,3 +12,5 @@ qa-screenshots/tmp*/
 qa-screenshots/current-*/
 playwright-report/
 test-results/
+
+.vercel/
