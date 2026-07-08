@@ -14,8 +14,14 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = 1024;
-    canvas.height = 600;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const logicalWidth = 1024;
+    const logicalHeight = 600;
+    canvas.width = logicalWidth * dpr;
+    canvas.height = logicalHeight * dpr;
+    canvas.style.width = `${logicalWidth}px`;
+    canvas.style.height = `${logicalHeight}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // Partículas 3D con colores blancos/plateados
     class Particle {
@@ -31,8 +37,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
       pulseSpeed: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * logicalWidth;
+        this.y = Math.random() * logicalHeight;
         this.z = Math.random() * 1000;
         this.size = Math.random() * 3 + 1;
         this.speedX = (Math.random() - 0.5) * 0.5;
@@ -58,10 +64,10 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
         this.z -= this.speedZ;
 
         // Wrap around
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
+        if (this.x < 0) this.x = logicalWidth;
+        if (this.x > logicalWidth) this.x = 0;
+        if (this.y < 0) this.y = logicalHeight;
+        if (this.y > logicalHeight) this.y = 0;
         if (this.z < 1) this.z = 1000;
 
         this.pulsePhase += this.pulseSpeed;
@@ -69,8 +75,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
 
       draw() {
         const scale = 1000 / (1000 + this.z);
-        const x2d = (this.x - canvas.width / 2) * scale + canvas.width / 2;
-        const y2d = (this.y - canvas.height / 2) * scale + canvas.height / 2;
+        const x2d = (this.x - logicalWidth / 2) * scale + logicalWidth / 2;
+        const y2d = (this.y - logicalHeight / 2) * scale + logicalHeight / 2;
         const size = this.size * scale;
         const pulse = Math.sin(this.pulsePhase) * 0.3 + 0.7;
 
@@ -114,8 +120,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
       morphInterval: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * logicalWidth;
+        this.y = Math.random() * logicalHeight;
         this.z = Math.random() * 800 + 200;
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.02;
@@ -223,8 +229,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
 
       draw() {
         const scale = 1000 / (1000 + this.z);
-        const x2d = (this.x - canvas.width / 2) * scale + canvas.width / 2;
-        const y2d = (this.y - canvas.height / 2) * scale + canvas.height / 2;
+        const x2d = (this.x - logicalWidth / 2) * scale + logicalWidth / 2;
+        const y2d = (this.y - logicalHeight / 2) * scale + logicalHeight / 2;
         const size = this.size * scale;
 
         ctx.save();
@@ -304,7 +310,7 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
 
       draw() {
         const scale = 1000 / (1000 + this.z);
-        const y2d = (this.y - canvas.height / 2) * scale + canvas.height / 2;
+        const y2d = (this.y - logicalHeight / 2) * scale + logicalHeight / 2;
         
         const alpha = (1 - this.z / 1000) * 0.18;
         ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
@@ -312,7 +318,7 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
         
         ctx.beginPath();
         ctx.moveTo(0, y2d);
-        ctx.lineTo(canvas.width, y2d);
+        ctx.lineTo(logicalWidth, y2d);
         ctx.stroke();
       }
     }
@@ -322,28 +328,28 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
     const shapes: GeometricShape[] = [];
     const gridLines: GridLine[] = [];
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 72; i++) {
       particles.push(new Particle());
     }
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       shapes.push(new GeometricShape());
     }
 
     for (let i = 0; i < 15; i++) {
       const line = new GridLine();
-      line.y = (i / 15) * canvas.height;
+      line.y = (i / 15) * logicalHeight;
       gridLines.push(line);
     }
 
     // Mouse interaction
-    let mouseX = canvas.width / 2;
-    let mouseY = canvas.height / 2;
+    let mouseX = logicalWidth / 2;
+    let mouseY = logicalHeight / 2;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
+      mouseX = ((e.clientX - rect.left) / rect.width) * logicalWidth;
+      mouseY = ((e.clientY - rect.top) / rect.height) * logicalHeight;
     };
 
     canvas.addEventListener('mousemove', handleMouseMove);
@@ -352,8 +358,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
     let animationFrameId: number;
     
     const animate = () => {
-      ctx.fillStyle = 'rgba(8, 10, 14, 0.15)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(5, 7, 11, 0.16)';
+      ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
       // Draw grid
       gridLines.forEach(line => {
@@ -406,10 +412,10 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
             const scale1 = 1000 / (1000 + particles[i].z);
             const scale2 = 1000 / (1000 + particles[j].z);
             
-            const x1 = (particles[i].x - canvas.width / 2) * scale1 + canvas.width / 2;
-            const y1 = (particles[i].y - canvas.height / 2) * scale1 + canvas.height / 2;
-            const x2 = (particles[j].x - canvas.width / 2) * scale2 + canvas.width / 2;
-            const y2 = (particles[j].y - canvas.height / 2) * scale2 + canvas.height / 2;
+            const x1 = (particles[i].x - logicalWidth / 2) * scale1 + logicalWidth / 2;
+            const y1 = (particles[i].y - logicalHeight / 2) * scale1 + logicalHeight / 2;
+            const x2 = (particles[j].x - logicalWidth / 2) * scale2 + logicalWidth / 2;
+            const y2 = (particles[j].y - logicalHeight / 2) * scale2 + logicalHeight / 2;
 
             const alpha = (1 - distance / 100) * 0.15;
             ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
@@ -438,8 +444,8 @@ export function AmbientBackground({ enabled }: AmbientBackgroundProps) {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: 1, opacity: 0.52 }}
+      className="absolute inset-0 pointer-events-none"
+      style={{ zIndex: 1, opacity: 0.68 }}
     />
   );
 }

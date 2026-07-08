@@ -22,14 +22,14 @@ interface Device {
   midiOutActive: boolean;
 }
 
-function useViewportFitScale(width: number, height: number, padding = 24) {
+function useViewportFitScale(width: number, height: number, padding = 0) {
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const updateScale = () => {
       const availableWidth = Math.max(320, window.innerWidth - padding);
       const availableHeight = Math.max(320, window.innerHeight - padding);
-      setScale(Math.min(1, availableWidth / width, availableHeight / height));
+      setScale(Math.min(availableWidth / width, availableHeight / height));
     };
 
     updateScale();
@@ -198,9 +198,9 @@ function App() {
   }
 
   return (
-    <div className="w-screen h-screen overflow-hidden bg-[#080a0e] flex items-center justify-center">
+    <div className="membrana-stage">
       <div
-        className="relative overflow-hidden bg-[#080a0e]"
+        className="membrana-system-frame relative overflow-hidden bg-[#080a0e]"
         style={{
           width: '1024px',
           height: '600px',
